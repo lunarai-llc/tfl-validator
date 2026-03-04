@@ -19,6 +19,55 @@ tfl-validate --config study_config.xlsx --output my_report.xlsx
 
 > 📊 **See what the output looks like before running anything** — check the [`examples/`](examples/) folder for a sample validation report (Excel) generated from the included synthetic dataset.
 
+## Demo Output
+
+Running `python demo.py` validates 15 TFLs against synthetic oncology data and produces output like this:
+
+```
+======================================================================
+Validating: T-01 — Table 14.1.1 — Demographic and Baseline Characteristics
+======================================================================
+  Parsed table: 18 rows × 5 cols
+  Columns: ['Parameter', 'Statistic', 'Drug A 10mg (N=11)', 'Drug B 20mg (N=10)', 'Placebo (N=14)']
+  N(Drug A 10mg): TFL=11, Calc=11 → PASS
+  N(Drug B 20mg): TFL=10, Calc=10 → PASS
+  N(Placebo): TFL=14, Calc=14 → PASS
+
+  ── Result: PASS (3/3 checks passed) ──
+
+======================================================================
+Validating: T-03 — Table 14.3.1 — Summary of Adverse Events
+======================================================================
+  Parsed table: 23 rows × 4 cols
+  any_teae(Drug A 10mg): TFL=None, Calc=11(100.0%) → FAIL
+  any_sae(Drug A 10mg): TFL=None, Calc=1(9.1%) → FAIL
+  ...
+
+  ── Result: FAIL (0/69 checks passed) ──
+
+======================================================================
+Validating: L-01 — Listing 16.2.7.1 — Treatment-Emergent Adverse Events
+======================================================================
+  Row count: TFL=96, Expected≈96 → PASS
+  Drug A 10mg: Subj=11, Events=32 (33.3%)
+  Drug B 20mg: Subj=10, Events=24 (25.0%)
+  Placebo: Subj=14, Events=40 (41.7%)
+
+  ── Result: PASS (1/1 checks passed) ──
+
+======================================================================
+VALIDATION SUMMARY
+======================================================================
+  TFLs Validated:  15
+  PASSED:          10
+  FAILED:          5
+  Calculations:    77
+  Comparisons:     77
+  Audit entries:   154
+```
+
+The generated Excel report contains color-coded PASS/FAIL results across multiple sheets — see [`examples/TFL_Validation_Report_EXAMPLE.xlsx`](examples/TFL_Validation_Report_EXAMPLE.xlsx) for a full sample.
+
 ## What It Does
 
 TFL Validator implements a complete validation pipeline:
@@ -154,6 +203,45 @@ tfl-validator-oss/
     └── test_basic.py           # Basic smoke tests
 ```
 
+## Flexible Configuration (New)
+
+Three optional sheets in `study_config.xlsx` let you customize validation for your study's specific TFL formats and ADaM conventions. If left empty, CDISC defaults are used.
+
+### Column Mapping sheet
+Map TFL table columns to treatment arms explicitly — no more guessing from column headers:
+
+```
+TFL ID  |  Table Index  |  Column Index  |  Column Header Pattern  |  Treatment Arm
+T-01    |  0            |  2             |  Drug A.*               |  Drug A 10mg
+T-01    |  0            |  3             |  Drug B.*               |  Drug B 20mg
+T-01    |  0            |  4             |  Placebo.*              |  Placebo
+```
+
+### Variable Mapping sheet
+Override ADaM variable names and define which variables to validate:
+
+```
+TFL ID  |  Variable Type    |  Variable Name  |  Value    |  Dataset  |  Notes
+T-01    |  continuous       |  AGE            |           |  ADSL     |  Age at baseline
+T-01    |  categorical      |  SEX            |           |  ADSL     |  Male/Female
+T-03    |  adam_flag         |  TRTEMFL        |  Y        |  ADAE     |  Treatment-emergent flag
+T-03    |  adam_flag         |  AESER          |  Y        |  ADAE     |  Serious AE flag
+T-10    |  survival_param   |  PARAMCD        |  PFS      |  ADTTE    |  Endpoint parameter code
+```
+
+Variable types: `continuous`, `categorical`, `adam_flag`, `survival_param`, `survival_flag`
+
+### Rounding Rules sheet
+Configure decimal precision per statistic (`*` = global default):
+
+```
+TFL ID  |  Statistic   |  Decimal Places  |  Notes
+*       |  Mean        |  1               |  Global default
+*       |  SD          |  2               |  Global default
+*       |  Percentage  |  1               |  Global default
+T-01    |  AGE_Mean    |  2               |  Override: AGE mean to 2 decimals
+```
+
 ## Configuration Reference
 
 ### Tolerances
@@ -183,7 +271,7 @@ Specify the order of treatment arms (Arm 1, Arm 2, ..., Arm 8) for consistent re
 This open-source version **does not support**:
 
 - **Complex TFL parsing**: tables with merged cells, nested headers, or non-standard layouts may require manual adjustment
-- **Non-standard variable names**: assumes CDISC ADaM naming conventions (USUBJID, TRT01A, TRTEMFL, AESER, etc.)
+- **Non-standard variable names**: defaults to CDISC ADaM naming conventions, but can be overridden via the Variable Mapping sheet in `study_config.xlsx`
 - **MMRM models**: analysis of continuous endpoints using mixed models
 - **Protocol/SAP cross-validation**: comparison against protocol-specified analyses (Pro feature)
 - **SAS code generation**: automated SAS program generation (Pro feature)
