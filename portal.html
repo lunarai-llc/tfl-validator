@@ -104,20 +104,52 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .match-rate.full{color:var(--green)}
 .match-rate.partial{color:var(--gold)}
 
-/* ===== DETAIL PANEL ===== */
-.detail-row{display:none}
-.detail-row.open{display:table-row}
-.detail-row td{padding:0 !important;border-left:4px solid var(--accent) !important;background:#f8fafc}
-.detail-inner{padding:16px 24px}
-.detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:6px}
-.detail-item{display:flex;justify-content:space-between;padding:8px 14px;border-radius:6px;font-size:0.8rem;background:var(--white);border:1px solid #e2e8f0}
-.detail-item.pass{border-left:3px solid var(--green)}
-.detail-item.fail{border-left:3px solid var(--red)}
-.detail-item .d-label{color:var(--text-muted);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.detail-item .d-vals{font-weight:600;font-family:'JetBrains Mono',monospace,system-ui;font-size:0.78rem}
-.detail-item.pass .d-vals{color:var(--green)}
-.detail-item.fail .d-vals{color:var(--red)}
-.detail-note{margin-top:8px;font-size:0.75rem;color:var(--text-light);font-style:italic}
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:flex-start;padding:40px 20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;width:100%;max-width:1100px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.3);animation:modalIn .25s ease-out}
+@keyframes modalIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.modal-header{background:var(--navy);padding:20px 28px;display:flex;justify-content:space-between;align-items:flex-start}
+.modal-header-text h2{color:white;font-size:1.1rem;font-weight:800;margin-bottom:2px}
+.modal-header-text p{color:#94a3b8;font-size:0.85rem;font-weight:400}
+.modal-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:white;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}
+.modal-close:hover{background:rgba(255,255,255,0.2)}
+.modal-body{padding:28px}
+
+/* Modal info cards */
+.modal-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.modal-info-card{background:#f8fafc;border:1px solid var(--card-border);border-radius:10px;padding:16px 20px}
+.modal-info-card .mic-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:6px}
+.modal-info-card .mic-value{font-size:0.95rem;font-weight:700;color:var(--text)}
+.modal-info-card .mic-value.fail-val{color:var(--red)}
+.modal-info-card .mic-value.pass-val{color:var(--green)}
+.modal-info-card .mic-value code{font-family:'JetBrains Mono',monospace,system-ui;background:var(--white);padding:2px 8px;border-radius:4px;border:1px solid var(--card-border);font-size:0.88rem}
+.modal-status-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:6px;font-size:0.82rem;font-weight:700}
+.modal-status-badge.pass{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.modal-status-badge.fail{background:#fef2f2;color:var(--red);border:1px solid var(--red-border)}
+.modal-checks-val .passed{color:var(--green);font-weight:700}
+.modal-checks-val .failed{color:var(--red);font-weight:700}
+
+/* Detailed findings */
+.modal-findings-title{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.modal-findings-divider{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:2px;margin-bottom:20px}
+.findings-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--card-border);border-radius:10px;overflow:hidden}
+.findings-table thead th{background:var(--navy);color:white;padding:12px 16px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;text-align:left}
+.findings-table tbody td{padding:12px 16px;font-size:0.84rem;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.findings-table tbody tr:last-child td{border-bottom:none}
+.findings-table tbody tr.row-fail{background:#fef2f2}
+.findings-table tbody tr.row-fail td{color:var(--text)}
+.findings-table .f-num{color:var(--text-muted);font-weight:600;text-align:center;width:40px}
+.findings-table .f-stat{font-weight:600;color:var(--navy)}
+.findings-table .f-ctx{color:var(--text-muted)}
+.findings-table .f-val{font-family:'JetBrains Mono',monospace,system-ui;font-weight:600;text-align:center}
+.findings-table .f-result{text-align:center}
+.findings-table .f-result-badge{display:inline-block;padding:3px 12px;border-radius:4px;font-size:0.72rem;font-weight:700;min-width:52px;text-align:center}
+.findings-table .f-result-badge.pass{background:var(--green-bg);color:var(--green)}
+.findings-table .f-result-badge.fail{background:var(--red-bg);color:var(--red)}
+.findings-table .f-note{font-size:0.78rem;color:var(--text-muted);max-width:260px}
+.findings-table .f-note.mismatch{color:var(--red);font-weight:600}
+.detail-note{margin-top:12px;font-size:0.78rem;color:var(--text-light);font-style:italic}
 
 /* ===== AUDIT TAB ===== */
 .audit-panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:24px}
@@ -256,6 +288,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <!-- ===== MAIN ===== -->
 <div class="main" id="mainContent"></div>
 
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOverlay(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
 <script>
 const DATA = {
   free: {
@@ -338,9 +375,147 @@ function switchTab(tab) {
 }
 
 function toggleRow(id) {
-  expandedRow = expandedRow === id ? null : id;
-  renderContent();
+  openModal(id);
 }
+
+function openModal(id) {
+  const s = getStats(currentVersion);
+  const r = s.results.find(x => x.id === id);
+  if (!r) return;
+
+  const dsMap = {demographics:'ADSL',disposition:'ADSL',safety_ae:'ADAE',safety_ae_grade:'ADAE',safety_sae:'ADAE',
+    listing:'—',lab_summary:'ADLB',vitals_summary:'ADVS',exposure:'ADSL',conmeds:'ADCM',medhist:'ADMH'};
+  const ds = dsMap[r.vtype] || '—';
+  const typeLabel = r.id.startsWith('L-') ? 'Listing' : 'Table';
+  const rate = r.total > 0 ? (r.passed/r.total*100).toFixed(1) : '—';
+  const failed = r.total - r.passed;
+  const fileRef = r.title.replace(/Table |Listing /,'').replace(/ — .*/,'').replace(/\./g,'_').toLowerCase();
+
+  // Build context strings for details
+  function getContext(label) {
+    if (label.startsWith('N(') || label.startsWith('N_safety(')) return 'N subjects';
+    if (label.includes('Mean(')) return label.split('(')[0].replace('_',' ') + ' — Mean';
+    if (label.includes('SD(') || label.includes('_sd(')) return label.split('(')[0].replace('_',' ') + ' — SD';
+    if (label.includes('Median(')) return label.split('(')[0].replace('_',' ') + ' — Median';
+    if (label.includes('Min(')) return label.split('(')[0].replace('_',' ') + ' — Min';
+    if (label.includes('Max(')) return label.split('(')[0].replace('_',' ') + ' — Max';
+    if (label.includes('_mean(')) return label.split('(')[0].replace(/_/g,' ') + ' — Mean';
+    if (label.includes('Duration_')) return 'Duration — ' + label.split('_')[1].split('(')[0];
+    if (label.includes('Grade')) return 'Severity — ' + label.split('(')[0];
+    if (label.includes('any_teae')) return 'Any TEAE';
+    if (label.includes('any_sae')) return 'Any SAE';
+    if (label.includes('any_related')) return 'Related AEs';
+    if (label.includes('Any SAE')) return 'Any SAE';
+    if (label.includes('SAE_SOC')) return 'SAE by SOC';
+    if (label.includes('SOC(')) return 'AE by SOC';
+    if (label.includes('PT(')) return 'AE by PT';
+    if (label.includes('AnyConMed')) return 'Any ConMed';
+    if (label.includes('CM_class')) return 'ATC Class';
+    if (label.includes('AnyMH')) return 'Any Med History';
+    if (label.includes('MH_SOC')) return 'Body System';
+    if (label.includes('Row count')) return 'Row count';
+    return '—';
+  }
+
+  function getNote(d) {
+    if (d.match) {
+      const tflNum = parseFloat(d.tfl);
+      const calcNum = parseFloat(d.calc);
+      const diff = isNaN(tflNum) || isNaN(calcNum) ? 0 : Math.abs(tflNum - calcNum);
+      let tol = 0;
+      if (d.label.includes('Mean') || d.label.includes('mean') || d.label.includes('Median') || d.label.includes('median')) tol = 0.15;
+      else if (d.label.includes('SD') || d.label.includes('sd')) tol = 0.05;
+      else if (d.label.includes('Min') || d.label.includes('Max') || d.label.includes('min') || d.label.includes('max')) tol = 0.5;
+      return `Match within tolerance (${diff.toFixed(4)} <= ${tol})`;
+    } else {
+      return `MISMATCH: TFL=${d.tfl} vs Calc=${d.calc} (diff=${Math.abs(parseFloat(d.tfl)-parseFloat(d.calc)).toFixed(4)||'N/A'})`;
+    }
+  }
+
+  let detailRows = '';
+  if (r.details && r.details.length > 0) {
+    detailRows = r.details.map((d, i) => {
+      const rowClass = d.match ? '' : ' row-fail';
+      const badgeClass = d.match ? 'pass' : 'fail';
+      const badgeText = d.match ? 'PASS' : 'FAIL';
+      const noteClass = d.match ? '' : ' mismatch';
+      return `<tr class="${rowClass}">
+        <td class="f-num">${i+1}</td>
+        <td class="f-stat">${d.label}</td>
+        <td class="f-ctx">${getContext(d.label)}</td>
+        <td class="f-val">${d.tfl || 'None'}</td>
+        <td class="f-val">${d.calc || 'None'}</td>
+        <td class="f-result"><span class="f-result-badge ${badgeClass}">${badgeText}</span></td>
+        <td class="f-note${noteClass}">${getNote(d)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  const noteHtml = (r.details && r.details.length < r.total) ? `<div class="detail-note">Showing ${r.details.length} of ${r.total} checks. Full details available in Excel report.</div>` : '';
+
+  const html = `
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h2>${r.id} — ${typeLabel}</h2>
+        <p>${r.title}</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info-grid">
+        <div class="modal-info-card">
+          <div class="mic-label">Status</div>
+          <div class="mic-value"><span class="modal-status-badge ${r.status.toLowerCase()}">${r.status === 'PASS' ? '&#10003;' : '&#10007;'} ${r.status === 'PASS' ? 'PASSED' : 'FAILED'} — ${r.passed}/${r.total} (${rate}%)</span></div>
+        </div>
+        <div class="modal-info-card">
+          <div class="mic-label">Source Dataset</div>
+          <div class="mic-value">${ds}</div>
+        </div>
+        <div class="modal-info-card">
+          <div class="mic-label">File Format</div>
+          <div class="mic-value">Word</div>
+        </div>
+        <div class="modal-info-card">
+          <div class="mic-label">File Reference</div>
+          <div class="mic-value"><code>${fileRef}.docx</code></div>
+        </div>
+        <div class="modal-info-card">
+          <div class="mic-label">Population Filter</div>
+          <div class="mic-value"><code>SAFFL == 'Y'</code></div>
+        </div>
+        <div class="modal-info-card">
+          <div class="mic-label">Checks Passed / Failed</div>
+          <div class="mic-value modal-checks-val"><span class="passed">${r.passed} passed</span>  |  <span class="${failed > 0 ? 'failed' : 'passed'}">${failed} failed</span></div>
+        </div>
+      </div>
+
+      <div class="modal-findings-title">Detailed Findings</div>
+      <div class="modal-findings-divider"></div>
+      <table class="findings-table">
+        <thead><tr><th>#</th><th>Statistic</th><th>Context</th><th>TFL Value</th><th>Recalculated</th><th>Result</th><th>Note</th></tr></thead>
+        <tbody>${detailRows}</tbody>
+      </table>
+      ${noteHtml}
+    </div>
+  `;
+
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOverlay(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
 
 function render() {
   const s = getStats(currentVersion);
@@ -423,8 +598,7 @@ function buildTable(items) {
     const rate = r.total > 0 ? (r.passed/r.total*100).toFixed(1) : '—';
     const rateClass = rate === '100.0' ? 'full' : 'partial';
     const typeLabel = r.id.startsWith('L-') ? 'Listing' : 'Table';
-    const expanded = expandedRow === r.id;
-    let html = `<tr class="${isFail?'fail':''}" onclick="toggleRow('${r.id}')">
+    return `<tr class="${isFail?'fail':''}" onclick="toggleRow('${r.id}')">
       <td>${r.id}</td>
       <td><span class="type-badge">${typeLabel}</span></td>
       <td>${r.title}</td>
@@ -433,21 +607,6 @@ function buildTable(items) {
       <td class="checks-text"><span>${r.passed}/${r.total}</span></td>
       <td class="match-rate ${rateClass}">${rate}%</td>
     </tr>`;
-    html += `<tr class="detail-row${expanded?' open':''}"><td colspan="7"><div class="detail-inner">`;
-    if (r.details && r.details.length > 0) {
-      html += '<div class="detail-grid">';
-      r.details.forEach(d => {
-        const cls = d.match ? 'pass' : 'fail';
-        const icon = d.match ? '&#10003;' : '&#10007;';
-        html += `<div class="detail-item ${cls}"><span class="d-label" title="${d.label}">${d.label}</span><span class="d-vals">${icon} TFL=${d.tfl||'None'} | Calc=${d.calc||'None'}</span></div>`;
-      });
-      html += '</div>';
-      if (r.details.length < r.total) html += `<div class="detail-note">Showing ${r.details.length} of ${r.total} checks. Full details in Excel report.</div>`;
-    } else {
-      html += '<div class="detail-note">Click to expand. Detailed checks available in Excel report.</div>';
-    }
-    html += '</div></td></tr>';
-    return html;
   }).join('');
 
   return `<table class="results-table">
