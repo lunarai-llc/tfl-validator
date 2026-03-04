@@ -23,7 +23,7 @@ header { background:var(--navy); padding:0 32px; display:flex; align-items:cente
 .badge { background:var(--blue); color:#fff; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; }
 .conf { background:rgba(255,0,0,.18); color:#ffaaaa; font-size:10px; font-weight:700; padding:3px 10px; border-radius:4px; letter-spacing:1px; border:1px solid rgba(255,100,100,.3); }
 .hdr-date { color:var(--lblue); font-size:12px; }
-nav { background:var(--navy); border-top:1px solid rgba(255,255,255,.1); display:flex; padding:0 32px; gap:2px; }
+nav { background:var(--navy); border-top:1px solid rgba(255,255,255,.1); display:flex; align-items:center; padding:0 32px; gap:2px; }
 .tab { background:none; border:none; color:rgba(255,255,255,.65); padding:12px 22px; cursor:pointer; font-size:13px; font-weight:600; border-bottom:3px solid transparent; transition:all .2s; display:flex; align-items:center; gap:7px; }
 .tab:hover { color:#fff; background:rgba(255,255,255,.07); }
 .tab.on { color:#fff; border-bottom-color:var(--lblue); background:rgba(255,255,255,.1); }
@@ -144,13 +144,12 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
 .lkpi-l { font-size:11px; color:var(--dgrey); text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
 
 /* VERSION TOGGLE */
-.ver-bar { background:var(--navy); border-top:1px solid rgba(255,255,255,.1); padding:8px 32px; display:flex; align-items:center; gap:14px; position:relative; z-index:50; }
-.ver-label { color:rgba(255,255,255,.7); font-size:12px; font-weight:600; }
-.ver-toggle { display:flex; border:2px solid rgba(255,255,255,.3); border-radius:8px; overflow:hidden; }
-.ver-btn { padding:6px 20px; border:none; background:rgba(255,255,255,.1); font-size:12px; font-weight:700; cursor:pointer; color:#fff; transition:all .15s; font-family:Arial,sans-serif; position:relative; z-index:51; pointer-events:auto; }
+.ver-spacer { flex:1; }
+.ver-toggle { display:flex; border:2px solid rgba(255,255,255,.3); border-radius:8px; overflow:hidden; margin-right:12px; }
+.ver-btn { padding:6px 20px; border:none; background:rgba(255,255,255,.1); font-size:12px; font-weight:700; cursor:pointer; color:#fff; transition:all .15s; font-family:Arial,sans-serif; }
 .ver-btn.on { background:var(--blue); color:#fff; }
 .ver-btn:not(.on):hover { background:rgba(255,255,255,.2); }
-.ver-desc { color:var(--lblue); font-size:11px; }
+.ver-desc { color:var(--lblue); font-size:11px; padding-right:8px; white-space:nowrap; }
 
 /* FREE VS PRO COMPARISON */
 .cmp-hero { text-align:center; padding:28px 0 20px; }
@@ -215,15 +214,13 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
   <button class="tab" onclick="go('audit',this)">📜 Audit Trail <span class="cnt">141</span></button>
   <button class="tab" onclick="go('specs',this)">📘 ADaM Specs <span class="cnt">49</span></button>
   <button class="tab" onclick="go('compare',this)">⚖️ Free vs Pro</button>
-</nav>
-<div class="ver-bar">
-  <span class="ver-label">Version:</span>
+  <div class="ver-spacer"></div>
   <div class="ver-toggle">
     <button class="ver-btn on" onclick="switchVer('free',this)">Free (OSS)</button>
     <button class="ver-btn" onclick="switchVer('pro',this)">Pro</button>
   </div>
-  <span class="ver-desc" id="verDesc">XYZ-2025-01 — Synthetic demo — 10 TFLs, 140 checks</span>
-</div>
+  <span class="ver-desc" id="verDesc">XYZ-2025-01 — Synthetic demo — 10 TFLs</span>
+</nav>
 <main>
 
 <!-- DASHBOARD -->
