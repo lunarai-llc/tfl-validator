@@ -15,7 +15,7 @@
   --red:#dc2626;--red-bg:#fee2e2;--red-border:#fca5a5;
   --yellow:#ca8a04;--yellow-bg:#fef9c3;
   --bg:#f1f5f9;--white:#ffffff;
-  --gold:#d97706;
+  --gold:#d97706;--purple:#7c3aed;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
@@ -125,20 +125,95 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .audit-entry .a-time{color:var(--text-light);font-size:0.72rem}
 .audit-entry .a-msg{margin-top:2px}
 
-/* ===== COMPARISON TABLE (for Protocol/SAP, SAS Programs tabs) ===== */
-.info-panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:32px;text-align:center}
+/* ===== INFO PANEL ===== */
+.info-panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:32px}
 .info-panel h3{font-size:1.1rem;margin-bottom:8px}
 .info-panel p{color:var(--text-muted);font-size:0.9rem;line-height:1.6}
+
+/* ===== TIER / COMPARISON TABLE ===== */
 .tier-table{width:100%;max-width:700px;margin:24px auto 0;border-collapse:collapse;font-size:0.85rem;text-align:left}
 .tier-table th,.tier-table td{padding:10px 16px;border-bottom:1px solid var(--card-border)}
 .tier-table th{color:var(--text-muted);font-weight:600;text-transform:uppercase;font-size:0.72rem;letter-spacing:0.04em}
 .tier-table .check{color:var(--green);font-weight:700}
 .tier-table .dash{color:var(--text-light)}
 
+/* ===== COMPARE TAB — ENHANCED ===== */
+.compare-hero{text-align:center;padding:32px 0 24px}
+.compare-hero h2{font-size:1.4rem;font-weight:800;margin-bottom:6px;color:var(--navy)}
+.compare-hero p{color:var(--text-muted);font-size:0.95rem;max-width:600px;margin:0 auto}
+.compare-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto 32px}
+.compare-card{background:var(--white);border:2px solid var(--card-border);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.compare-card.pro{border-color:var(--accent);box-shadow:0 4px 24px rgba(37,99,235,0.12)}
+.compare-card .tier-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px}
+.compare-card.free .tier-badge{background:#f1f5f9;color:var(--text-muted)}
+.compare-card.pro .tier-badge{background:linear-gradient(135deg,var(--accent),var(--purple));color:white}
+.compare-card .tier-title{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.compare-card .tier-sub{font-size:0.82rem;color:var(--text-muted);margin-bottom:20px}
+.compare-card .tier-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.compare-card .tier-stat{background:#f8fafc;border-radius:8px;padding:12px;text-align:center}
+.compare-card .tier-stat .s-num{font-size:1.6rem;font-weight:800;color:var(--text)}
+.compare-card.pro .tier-stat .s-num{color:var(--accent)}
+.compare-card .tier-stat .s-lbl{font-size:0.68rem;font-weight:600;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.04em}
+.compare-card .tier-features{list-style:none;padding:0}
+.compare-card .tier-features li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:0.82rem;color:var(--text)}
+.compare-card .tier-features li .feat-icon{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700}
+.compare-card .tier-features li .feat-icon.yes{background:var(--green-bg);color:var(--green)}
+.compare-card .tier-features li .feat-icon.no{background:#f1f5f9;color:var(--text-light)}
+.compare-card .tier-features li .feat-icon.pro-only{background:#eff6ff;color:var(--accent)}
+.pro-ribbon{position:absolute;top:16px;right:-30px;background:linear-gradient(135deg,var(--accent),var(--purple));color:white;font-size:0.6rem;font-weight:800;padding:4px 40px;transform:rotate(45deg);text-transform:uppercase;letter-spacing:0.1em}
+
+/* Feature comparison grid */
+.feature-grid{max-width:900px;margin:0 auto}
+.feature-grid-title{font-size:1rem;font-weight:700;margin-bottom:16px;text-align:center}
+.feature-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--card-border);border-radius:12px;overflow:hidden}
+.feature-table thead th{background:var(--navy);color:white;padding:14px 20px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;text-align:center}
+.feature-table thead th:first-child{text-align:left}
+.feature-table tbody td{padding:12px 20px;border-bottom:1px solid #f1f5f9;font-size:0.85rem}
+.feature-table tbody tr:last-child td{border-bottom:none}
+.feature-table tbody td:first-child{font-weight:600;color:var(--text)}
+.feature-table tbody td:not(:first-child){text-align:center;font-weight:600}
+.feature-table .ft-yes{color:var(--green)}
+.feature-table .ft-no{color:var(--text-light)}
+.feature-table .ft-pro{color:var(--accent);font-weight:700}
+.feature-table tbody tr:nth-child(even){background:#fafbfc}
+.feature-table .cat-row td{background:#f1f5f9;font-weight:700 !important;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted) !important;padding:8px 20px}
+
+/* ===== PROTOCOL & SAP TAB ===== */
+.protocol-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.protocol-card{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:24px}
+.protocol-card h4{font-size:0.9rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.protocol-card .p-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:0.82rem}
+.protocol-card .p-row:last-child{border-bottom:none}
+.protocol-card .p-label{color:var(--text-muted)}
+.protocol-card .p-value{font-weight:600;color:var(--text)}
+
+/* ===== SAS PROGRAMS TAB ===== */
+.sas-table{width:100%;background:var(--white);border:1px solid var(--card-border);border-radius:12px;overflow:hidden;border-collapse:separate;border-spacing:0}
+.sas-table thead th{background:#f8fafc;padding:12px 16px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);text-align:left;border-bottom:2px solid var(--card-border)}
+.sas-table tbody td{padding:12px 16px;font-size:0.82rem;border-bottom:1px solid #f1f5f9}
+.sas-table tbody tr:last-child td{border-bottom:none}
+.sas-table .prog-name{font-weight:600;font-family:'JetBrains Mono',monospace,system-ui;color:var(--accent);font-size:0.82rem}
+.sas-table .prog-status{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:5px;font-size:0.7rem;font-weight:700}
+.sas-table .prog-status.validated{background:var(--green-bg);color:var(--green)}
+.sas-table .prog-status.pending{background:var(--yellow-bg);color:var(--yellow)}
+
+/* ===== QUERIES TAB ===== */
+.query-card{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:20px;margin-bottom:12px}
+.query-card .q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.query-card .q-title{font-weight:700;font-size:0.9rem}
+.query-card .q-badge{padding:3px 10px;border-radius:5px;font-size:0.7rem;font-weight:700}
+.query-card .q-badge.open{background:var(--yellow-bg);color:var(--yellow)}
+.query-card .q-badge.resolved{background:var(--green-bg);color:var(--green)}
+.query-card .q-badge.critical{background:var(--red-bg);color:var(--red)}
+.query-card .q-body{font-size:0.82rem;color:var(--text-muted);line-height:1.5}
+.query-card .q-meta{font-size:0.72rem;color:var(--text-light);margin-top:8px}
+
 @media(max-width:900px){
   .stat-cards{grid-template-columns:repeat(3,1fr)}
   .detail-grid{grid-template-columns:1fr}
   .main{padding:16px}
+  .compare-cards{grid-template-columns:1fr}
+  .protocol-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .stat-cards{grid-template-columns:repeat(2,1fr)}
@@ -183,8 +258,41 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <script>
 const DATA = {
-  free: {"study":{"study_id":"XYZ-2025-01","study_title":"A Phase III Study of Drug A vs Placebo in Oncology","protocol":"XYZ-2025-01-PROT-v3.0","sponsor":"Acme Pharma Inc.","cro":"Lunar AI","phase":"Phase III","indication":"Oncology \u2014 NSCLC","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 (OSS)"},"results":[{"id":"T-01","title":"Table 14.1.1 \u2014 Demographic and Baseline Characteristics","type":"Table","vtype":"demographics","status":"FAIL","passed":34,"total":51,"details":[{"label":"N(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N(Placebo)","tfl":"14","calc":"14","match":true},{"label":"Mean(AGE, Drug A 10mg)","tfl":"53.3","calc":"53.3","match":true},{"label":"SD(AGE, Drug A 10mg)","tfl":"12.99","calc":"12.99","match":true},{"label":"Median(AGE, Drug A 10mg)","tfl":"49.0","calc":"49.0","match":true},{"label":"Min(AGE, Drug A 10mg)","tfl":"34","calc":"34","match":true},{"label":"Max(AGE, Drug A 10mg)","tfl":"73","calc":"73","match":true},{"label":"Mean(AGE, Drug B 20mg)","tfl":"56.7","calc":"54.4","match":false},{"label":"SD(AGE, Drug B 20mg)","tfl":"10.01","calc":"10.01","match":true},{"label":"Median(AGE, Drug B 20mg)","tfl":"55.5","calc":"55.5","match":true},{"label":"Min(AGE, Drug B 20mg)","tfl":"37","calc":"37","match":true}]},{"id":"T-02","title":"Table 14.1.2 \u2014 Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N_safety(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N_safety(Placebo)","tfl":"14","calc":"14","match":true}]},{"id":"T-03","title":"Table 14.3.1 \u2014 Summary of Adverse Events","type":"Table","vtype":"safety_ae","status":"FAIL","passed":66,"total":69,"details":[{"label":"any_teae(Drug A 10mg)","tfl":"11 (100.0)","calc":"11 (100.0)","match":true},{"label":"any_teae(Drug B 20mg)","tfl":"10 (100.0)","calc":"10 (100.0)","match":true},{"label":"any_teae(Placebo)","tfl":"14 (100.0)","calc":"14 (100.0)","match":true},{"label":"any_sae(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"any_sae(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"any_sae(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true},{"label":"any_related(Drug A 10mg)","tfl":"11 (100.0)","calc":"7 (63.6)","match":false},{"label":"any_related(Drug B 20mg)","tfl":"7 (70.0)","calc":"5 (50.0)","match":false},{"label":"any_related(Placebo)","tfl":"12 (85.7)","calc":"7 (50.0)","match":false},{"label":"SOC(Gastrointestinal disorder, Drug A 10mg)","tfl":"5 (45.5)","calc":"5 (45.5)","match":true},{"label":"PT(Abdominal pain, Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"PT(Diarrhoea, Drug A 10mg)","tfl":"2 (18.2)","calc":"2 (18.2)","match":true}]},{"id":"T-04","title":"Table 14.3.2 \u2014 Adverse Events by Grade","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Drug A 10mg)","tfl":"10 (90.9)","calc":"10 (90.9)","match":true},{"label":"Grade 1-2(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 1-2(Placebo)","tfl":"13 (92.9)","calc":"13 (92.9)","match":true},{"label":"Grade 3(Drug A 10mg)","tfl":"7 (63.6)","calc":"7 (63.6)","match":true},{"label":"Grade 3(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 3(Placebo)","tfl":"6 (42.9)","calc":"6 (42.9)","match":true},{"label":"Grade 4(Drug A 10mg)","tfl":"2 (18.2)","calc":"2 (18.2)","match":true},{"label":"Grade 4(Drug B 20mg)","tfl":"2 (20.0)","calc":"2 (20.0)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (35.7)","calc":"5 (35.7)","match":true}]},{"id":"T-05","title":"Table 14.3.3 \u2014 Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":15,"total":15,"details":[{"label":"Any SAE(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"Any SAE(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"Any SAE(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Placebo)","tfl":"1 (7.1)","calc":"1 (7.1)","match":true},{"label":"SAE_SOC(General disorders,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(General disorders,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(General disorders,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true}]},{"id":"L-01","title":"Listing 16.2.7.1 \u2014 Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"96","calc":"96","match":true}]},{"id":"L-02","title":"Listing 16.2.7.2 \u2014 Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"8","calc":"8","match":true}]},{"id":"L-03","title":"Listing 16.2.7.3 \u2014 Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"4","calc":"4","match":true}]},{"id":"L-04","title":"Listing 16.2.7.4 \u2014 Individual Subject Responses","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"40","calc":"40","match":true}]},{"id":"L-05","title":"Listing 16.2.7.5 \u2014 Protocol Deviations","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"6","calc":"6","match":true}]}]},
-  pro: {"study":{"study_id":"CDISCPILOT01","study_title":"Safety and Efficacy of Xanomeline in Patients with Mild to Moderate Alzheimer's Disease","protocol":"CDISCPILOT01-PROT","sponsor":"CDISC","cro":"Lunar AI","phase":"Phase III","indication":"CNS \u2014 Alzheimer's Disease","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 (OSS)"},"results":[{"id":"T-01","title":"Table 14.1.1 \u2014 Summary of Demographics and Baseline Characteristics","type":"Table","vtype":"demographics","status":"PASS","passed":39,"total":39,"details":[{"label":"N(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true},{"label":"Mean(AGE, Placebo)","tfl":"75.2","calc":"75.2","match":true},{"label":"SD(AGE, Placebo)","tfl":"8.59","calc":"8.59","match":true},{"label":"Median(AGE, Placebo)","tfl":"76.0","calc":"76.0","match":true},{"label":"Min(AGE, Placebo)","tfl":"52","calc":"52","match":true},{"label":"Max(AGE, Placebo)","tfl":"89","calc":"89","match":true},{"label":"Mean(AGE, Xanomeline High Dose)","tfl":"73.8","calc":"73.8","match":true},{"label":"SD(AGE, Xanomeline High Dose)","tfl":"7.94","calc":"7.94","match":true},{"label":"Median(AGE, Xanomeline High Dose)","tfl":"75.5","calc":"75.5","match":true},{"label":"Min(AGE, Xanomeline High Dose)","tfl":"56","calc":"56","match":true}]},{"id":"T-02","title":"Table 14.1.2 \u2014 Summary of Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N_safety(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N_safety(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true}]},{"id":"T-03","title":"Table 14.3.1 \u2014 Overall Summary of Treatment-Emergent Adverse Events","type":"Table","vtype":"safety_ae","status":"PASS","passed":9,"total":9,"details":[{"label":"any_teae(Placebo)","tfl":"65 (75.6)","calc":"65 (75.6)","match":true},{"label":"any_teae(Xanomeline High Dose)","tfl":"68 (94.4)","calc":"68 (94.4)","match":true},{"label":"any_teae(Xanomeline Low Dose)","tfl":"84 (87.5)","calc":"84 (87.5)","match":true},{"label":"any_sae(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"any_sae(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"any_sae(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"any_related(Placebo)","tfl":"43 (50.0)","calc":"43 (50.0)","match":true},{"label":"any_related(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"any_related(Xanomeline Low Dose)","tfl":"77 (80.2)","calc":"77 (80.2)","match":true}]},{"id":"T-05","title":"Table 14.3.3 \u2014 Summary of Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":6,"total":6,"details":[{"label":"Any SAE(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"Any SAE(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"Any SAE(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true}]},{"id":"T-06","title":"Table 14.3.4 \u2014 TEAEs by Maximum Severity","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Placebo)","tfl":"58 (67.4)","calc":"58 (67.4)","match":true},{"label":"Grade 1-2(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"Grade 1-2(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"Grade 3(Placebo)","tfl":"25 (29.1)","calc":"25 (29.1)","match":true},{"label":"Grade 3(Xanomeline High Dose)","tfl":"46 (63.9)","calc":"46 (63.9)","match":true},{"label":"Grade 3(Xanomeline Low Dose)","tfl":"58 (60.4)","calc":"58 (60.4)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (5.8)","calc":"5 (5.8)","match":true},{"label":"Grade 4(Xanomeline High Dose)","tfl":"8 (11.1)","calc":"8 (11.1)","match":true},{"label":"Grade 4(Xanomeline Low Dose)","tfl":"16 (16.7)","calc":"16 (16.7)","match":true}]},{"id":"L-01","title":"Listing 16.2.7.1 \u2014 Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1122","calc":"1122","match":true}]},{"id":"L-02","title":"Listing 16.2.7.2 \u2014 Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},{"id":"L-03","title":"Listing 16.2.7.3 \u2014 Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},{"id":"L-04","title":"Listing 16.2.8.1 \u2014 Concomitant Medications","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"7510","calc":"7510","match":true}]},{"id":"L-05","title":"Listing 16.2.5.1 \u2014 Medical History","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1818","calc":"1818","match":true}]},{"id":"T-07","title":"Table 14.2.1 \u2014 Summary of Exposure to Study Treatment","type":"Table","vtype":"exposure","status":"PASS","passed":21,"total":21,"details":[{"label":"Duration_mean(Placebo)","tfl":"149.5","calc":"149.5","match":true},{"label":"Duration_median(Placebo)","tfl":"182.0","calc":"182.0","match":true},{"label":"Duration_min(Placebo)","tfl":"7","calc":"7","match":true},{"label":"Duration_max(Placebo)","tfl":"210","calc":"210","match":true},{"label":"Duration_mean(Xanomeline High Dose)","tfl":"112.2","calc":"112.2","match":true},{"label":"Duration_median(Xanomeline High Dose)","tfl":"96.5","calc":"96.5","match":true},{"label":"Duration_min(Xanomeline High Dose)","tfl":"15","calc":"15","match":true},{"label":"Duration_max(Xanomeline High Dose)","tfl":"200","calc":"200","match":true},{"label":"Duration_mean(Xanomeline Low Dose)","tfl":"86.8","calc":"86.8","match":true},{"label":"Duration_median(Xanomeline Low Dose)","tfl":"63.0","calc":"63.0","match":true},{"label":"Duration_min(Xanomeline Low Dose)","tfl":"1","calc":"1","match":true},{"label":"Duration_max(Xanomeline Low Dose)","tfl":"212","calc":"212","match":true}]},{"id":"T-08","title":"Table 14.4.1 \u2014 Summary of Selected Laboratory Results","type":"Table","vtype":"lab_summary","status":"PASS","passed":60,"total":60,"details":[{"label":"ALT_baseline_mean(Placebo)","tfl":"17.1","calc":"17.1","match":true},{"label":"ALT_baseline_sd(Placebo)","tfl":"7.52","calc":"7.52","match":true},{"label":"ALT_baseline_mean(Xanomeline High Dose)","tfl":"18.7","calc":"18.7","match":true},{"label":"ALT_baseline_sd(Xanomeline High Dose)","tfl":"9.04","calc":"9.04","match":true},{"label":"ALT_baseline_mean(Xanomeline Low Dose)","tfl":"17.7","calc":"17.7","match":true},{"label":"ALT_baseline_sd(Xanomeline Low Dose)","tfl":"7.94","calc":"7.94","match":true},{"label":"ALT_postbaseline_mean(Placebo)","tfl":"15.8","calc":"15.8","match":true},{"label":"ALT_postbaseline_sd(Placebo)","tfl":"6.03","calc":"6.03","match":true},{"label":"ALT_postbaseline_mean(Xanomeline High Dose)","tfl":"18.3","calc":"18.3","match":true},{"label":"ALT_postbaseline_sd(Xanomeline High Dose)","tfl":"6.01","calc":"6.01","match":true},{"label":"ALT_postbaseline_mean(Xanomeline Low Dose)","tfl":"16.3","calc":"16.3","match":true},{"label":"ALT_postbaseline_sd(Xanomeline Low Dose)","tfl":"6.36","calc":"6.36","match":true}]},{"id":"T-09","title":"Table 14.4.2 \u2014 Summary of Vital Signs","type":"Table","vtype":"vitals_summary","status":"PASS","passed":18,"total":18,"details":[{"label":"SYSBP_baseline_mean(Placebo)","tfl":"136.8","calc":"136.8","match":true},{"label":"SYSBP_baseline_mean(Xanomeline High Dose)","tfl":"137.8","calc":"137.8","match":true},{"label":"SYSBP_baseline_mean(Xanomeline Low Dose)","tfl":"137.9","calc":"137.9","match":true},{"label":"SYSBP_end_of_treatment_mean(Placebo)","tfl":"132.7","calc":"132.7","match":true},{"label":"SYSBP_end_of_treatment_mean(Xanomeline High Dose)","tfl":"132.3","calc":"132.3","match":true},{"label":"SYSBP_end_of_treatment_mean(Xanomeline Low Dose)","tfl":"133.0","calc":"133.0","match":true},{"label":"DIABP_baseline_mean(Placebo)","tfl":"77.1","calc":"77.1","match":true},{"label":"DIABP_baseline_mean(Xanomeline High Dose)","tfl":"78.2","calc":"78.2","match":true},{"label":"DIABP_baseline_mean(Xanomeline Low Dose)","tfl":"76.6","calc":"76.6","match":true},{"label":"DIABP_end_of_treatment_mean(Placebo)","tfl":"74.4","calc":"74.4","match":true},{"label":"DIABP_end_of_treatment_mean(Xanomeline High Dose)","tfl":"76.0","calc":"76.0","match":true},{"label":"DIABP_end_of_treatment_mean(Xanomeline Low Dose)","tfl":"76.0","calc":"76.0","match":true}]},{"id":"T-10","title":"Table 14.5.1 \u2014 Summary of Concomitant Medications by ATC Class","type":"Table","vtype":"conmeds","status":"PASS","passed":24,"total":24,"details":[{"label":"AnyConMed(Placebo)","tfl":"50 (58.1)","calc":"50 (58.1)","match":true},{"label":"AnyConMed(Xanomeline High Dose)","tfl":"51 (70.8)","calc":"51 (70.8)","match":true},{"label":"AnyConMed(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Placebo)","tfl":"2 (2.3)","calc":"2 (2.3)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Xanomeline High Dose)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Xanomeline Low Dose)","tfl":"1 (1.0)","calc":"1 (1.0)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Placebo)","tfl":"3 (3.5)","calc":"3 (3.5)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Xanomeline High Dose)","tfl":"3 (4.2)","calc":"3 (4.2)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Xanomeline Low Dose)","tfl":"3 (3.1)","calc":"3 (3.1)","match":true}]},{"id":"T-11","title":"Table 14.5.2 \u2014 Summary of Medical History by Body System","type":"Table","vtype":"medhist","status":"PASS","passed":81,"total":81,"details":[{"label":"AnyMH(Placebo)","tfl":"86 (100.0)","calc":"86 (100.0)","match":true},{"label":"AnyMH(Xanomeline High Dose)","tfl":"72 (100.0)","calc":"72 (100.0)","match":true},{"label":"AnyMH(Xanomeline Low Dose)","tfl":"96 (100.0)","calc":"96 (100.0)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Placebo)","tfl":"2 (2.3)","calc":"2 (2.3)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Xanomeline Low Dose)","tfl":"3 (3.1)","calc":"3 (3.1)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Placebo)","tfl":"17 (19.8)","calc":"17 (19.8)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Xanomeline High Dose)","tfl":"15 (20.8)","calc":"15 (20.8)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Xanomeline Low Dose)","tfl":"25 (26.0)","calc":"25 (26.0)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Placebo)","tfl":"3 (3.5)","calc":"3 (3.5)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Xanomeline Low Dose)","tfl":"1 (1.0)","calc":"1 (1.0)","match":true}]}]}
+  free: {
+    "study":{"study_id":"XYZ-2025-01","study_title":"A Phase III Study of Drug A vs Placebo in Oncology","protocol":"XYZ-2025-01-PROT-v3.0","sponsor":"Acme Pharma Inc.","cro":"Lunar AI","phase":"Phase III","indication":"Oncology — NSCLC","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 (OSS)"},
+    "results":[
+      {"id":"T-01","title":"Table 14.1.1 — Demographic and Baseline Characteristics","type":"Table","vtype":"demographics","status":"FAIL","passed":34,"total":51,"details":[{"label":"N(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N(Placebo)","tfl":"14","calc":"14","match":true},{"label":"Mean(AGE, Drug A 10mg)","tfl":"53.3","calc":"53.3","match":true},{"label":"SD(AGE, Drug A 10mg)","tfl":"12.99","calc":"12.99","match":true},{"label":"Median(AGE, Drug A 10mg)","tfl":"49.0","calc":"49.0","match":true},{"label":"Min(AGE, Drug A 10mg)","tfl":"34","calc":"34","match":true},{"label":"Max(AGE, Drug A 10mg)","tfl":"73","calc":"73","match":true},{"label":"Mean(AGE, Drug B 20mg)","tfl":"56.7","calc":"54.4","match":false},{"label":"SD(AGE, Drug B 20mg)","tfl":"10.01","calc":"10.01","match":true},{"label":"Median(AGE, Drug B 20mg)","tfl":"55.5","calc":"55.5","match":true},{"label":"Min(AGE, Drug B 20mg)","tfl":"37","calc":"37","match":true}]},
+      {"id":"T-02","title":"Table 14.1.2 — Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N_safety(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N_safety(Placebo)","tfl":"14","calc":"14","match":true}]},
+      {"id":"T-03","title":"Table 14.3.1 — Summary of Adverse Events","type":"Table","vtype":"safety_ae","status":"FAIL","passed":66,"total":69,"details":[{"label":"any_teae(Drug A 10mg)","tfl":"11 (100.0)","calc":"11 (100.0)","match":true},{"label":"any_teae(Drug B 20mg)","tfl":"10 (100.0)","calc":"10 (100.0)","match":true},{"label":"any_teae(Placebo)","tfl":"14 (100.0)","calc":"14 (100.0)","match":true},{"label":"any_sae(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"any_sae(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"any_sae(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true},{"label":"any_related(Drug A 10mg)","tfl":"11 (100.0)","calc":"7 (63.6)","match":false},{"label":"any_related(Drug B 20mg)","tfl":"7 (70.0)","calc":"5 (50.0)","match":false},{"label":"any_related(Placebo)","tfl":"12 (85.7)","calc":"7 (50.0)","match":false}]},
+      {"id":"T-04","title":"Table 14.3.2 — Adverse Events by Grade","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Drug A 10mg)","tfl":"10 (90.9)","calc":"10 (90.9)","match":true},{"label":"Grade 1-2(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 1-2(Placebo)","tfl":"13 (92.9)","calc":"13 (92.9)","match":true},{"label":"Grade 3(Drug A 10mg)","tfl":"7 (63.6)","calc":"7 (63.6)","match":true},{"label":"Grade 3(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 3(Placebo)","tfl":"6 (42.9)","calc":"6 (42.9)","match":true},{"label":"Grade 4(Drug A 10mg)","tfl":"2 (18.2)","calc":"2 (18.2)","match":true},{"label":"Grade 4(Drug B 20mg)","tfl":"2 (20.0)","calc":"2 (20.0)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (35.7)","calc":"5 (35.7)","match":true}]},
+      {"id":"T-05","title":"Table 14.3.3 — Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":15,"total":15,"details":[{"label":"Any SAE(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"Any SAE(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"Any SAE(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true}]},
+      {"id":"L-01","title":"Listing 16.2.7.1 — Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"96","calc":"96","match":true}]},
+      {"id":"L-02","title":"Listing 16.2.7.2 — Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"8","calc":"8","match":true}]},
+      {"id":"L-03","title":"Listing 16.2.7.3 — Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"4","calc":"4","match":true}]},
+      {"id":"L-04","title":"Listing 16.2.7.4 — Individual Subject Responses","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"40","calc":"40","match":true}]},
+      {"id":"L-05","title":"Listing 16.2.7.5 — Protocol Deviations","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"6","calc":"6","match":true}]}
+    ]
+  },
+  pro: {
+    "study":{"study_id":"CDISCPILOT01","study_title":"Safety and Efficacy of Xanomeline in Patients with Mild to Moderate Alzheimer's Disease","protocol":"CDISCPILOT01-PROT","sponsor":"CDISC","cro":"Lunar AI","phase":"Phase III","indication":"CNS — Alzheimer's Disease","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 Pro"},
+    "results":[
+      {"id":"T-01","title":"Table 14.1.1 — Summary of Demographics and Baseline Characteristics","type":"Table","vtype":"demographics","status":"PASS","passed":39,"total":39,"details":[{"label":"N(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true},{"label":"Mean(AGE, Placebo)","tfl":"75.2","calc":"75.2","match":true},{"label":"SD(AGE, Placebo)","tfl":"8.59","calc":"8.59","match":true},{"label":"Median(AGE, Placebo)","tfl":"76.0","calc":"76.0","match":true},{"label":"Min(AGE, Placebo)","tfl":"52","calc":"52","match":true},{"label":"Max(AGE, Placebo)","tfl":"89","calc":"89","match":true},{"label":"Mean(AGE, Xanomeline High Dose)","tfl":"73.8","calc":"73.8","match":true},{"label":"SD(AGE, Xanomeline High Dose)","tfl":"7.94","calc":"7.94","match":true}]},
+      {"id":"T-02","title":"Table 14.1.2 — Summary of Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N_safety(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N_safety(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true}]},
+      {"id":"T-03","title":"Table 14.3.1 — Overall Summary of Treatment-Emergent Adverse Events","type":"Table","vtype":"safety_ae","status":"PASS","passed":9,"total":9,"details":[{"label":"any_teae(Placebo)","tfl":"65 (75.6)","calc":"65 (75.6)","match":true},{"label":"any_teae(Xanomeline High Dose)","tfl":"68 (94.4)","calc":"68 (94.4)","match":true},{"label":"any_teae(Xanomeline Low Dose)","tfl":"84 (87.5)","calc":"84 (87.5)","match":true},{"label":"any_sae(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"any_sae(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"any_sae(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"any_related(Placebo)","tfl":"43 (50.0)","calc":"43 (50.0)","match":true},{"label":"any_related(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"any_related(Xanomeline Low Dose)","tfl":"77 (80.2)","calc":"77 (80.2)","match":true}]},
+      {"id":"T-05","title":"Table 14.3.3 — Summary of Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":6,"total":6,"details":[{"label":"Any SAE(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"Any SAE(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"Any SAE(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true}]},
+      {"id":"T-06","title":"Table 14.3.4 — TEAEs by Maximum Severity","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Placebo)","tfl":"58 (67.4)","calc":"58 (67.4)","match":true},{"label":"Grade 1-2(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"Grade 1-2(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"Grade 3(Placebo)","tfl":"25 (29.1)","calc":"25 (29.1)","match":true},{"label":"Grade 3(Xanomeline High Dose)","tfl":"46 (63.9)","calc":"46 (63.9)","match":true},{"label":"Grade 3(Xanomeline Low Dose)","tfl":"58 (60.4)","calc":"58 (60.4)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (5.8)","calc":"5 (5.8)","match":true},{"label":"Grade 4(Xanomeline High Dose)","tfl":"8 (11.1)","calc":"8 (11.1)","match":true},{"label":"Grade 4(Xanomeline Low Dose)","tfl":"16 (16.7)","calc":"16 (16.7)","match":true}]},
+      {"id":"L-01","title":"Listing 16.2.7.1 — Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1122","calc":"1122","match":true}]},
+      {"id":"L-02","title":"Listing 16.2.7.2 — Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},
+      {"id":"L-03","title":"Listing 16.2.7.3 — Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},
+      {"id":"L-04","title":"Listing 16.2.8.1 — Concomitant Medications","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"7510","calc":"7510","match":true}]},
+      {"id":"L-05","title":"Listing 16.2.5.1 — Medical History","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1818","calc":"1818","match":true}]},
+      {"id":"T-07","title":"Table 14.2.1 — Summary of Exposure to Study Treatment","type":"Table","vtype":"exposure","status":"PASS","passed":21,"total":21,"details":[{"label":"Duration_mean(Placebo)","tfl":"149.5","calc":"149.5","match":true},{"label":"Duration_median(Placebo)","tfl":"182.0","calc":"182.0","match":true},{"label":"Duration_min(Placebo)","tfl":"7","calc":"7","match":true},{"label":"Duration_max(Placebo)","tfl":"210","calc":"210","match":true},{"label":"Duration_mean(Xanomeline High Dose)","tfl":"112.2","calc":"112.2","match":true},{"label":"Duration_median(Xanomeline High Dose)","tfl":"96.5","calc":"96.5","match":true}]},
+      {"id":"T-08","title":"Table 14.4.1 — Summary of Selected Laboratory Results","type":"Table","vtype":"lab_summary","status":"PASS","passed":60,"total":60,"details":[{"label":"ALT_baseline_mean(Placebo)","tfl":"17.1","calc":"17.1","match":true},{"label":"ALT_baseline_sd(Placebo)","tfl":"7.52","calc":"7.52","match":true},{"label":"ALT_baseline_mean(Xanomeline High Dose)","tfl":"18.7","calc":"18.7","match":true},{"label":"ALT_baseline_sd(Xanomeline High Dose)","tfl":"9.04","calc":"9.04","match":true},{"label":"ALT_postbaseline_mean(Placebo)","tfl":"15.8","calc":"15.8","match":true},{"label":"ALT_postbaseline_sd(Placebo)","tfl":"6.03","calc":"6.03","match":true}]},
+      {"id":"T-09","title":"Table 14.4.2 — Summary of Vital Signs","type":"Table","vtype":"vitals_summary","status":"PASS","passed":18,"total":18,"details":[{"label":"SYSBP_baseline_mean(Placebo)","tfl":"136.8","calc":"136.8","match":true},{"label":"SYSBP_baseline_mean(Xanomeline High Dose)","tfl":"137.8","calc":"137.8","match":true},{"label":"SYSBP_end_of_treatment_mean(Placebo)","tfl":"132.7","calc":"132.7","match":true},{"label":"DIABP_baseline_mean(Placebo)","tfl":"77.1","calc":"77.1","match":true},{"label":"DIABP_end_of_treatment_mean(Placebo)","tfl":"74.4","calc":"74.4","match":true},{"label":"PULSE_baseline_mean(Placebo)","tfl":"63.5","calc":"63.5","match":true}]},
+      {"id":"T-10","title":"Table 14.5.1 — Summary of Concomitant Medications by ATC Class","type":"Table","vtype":"conmeds","status":"PASS","passed":24,"total":24,"details":[{"label":"AnyConMed(Placebo)","tfl":"50 (58.1)","calc":"50 (58.1)","match":true},{"label":"AnyConMed(Xanomeline High Dose)","tfl":"51 (70.8)","calc":"51 (70.8)","match":true},{"label":"AnyConMed(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"CM_class(ALIMENTARY TRACT,Placebo)","tfl":"2 (2.3)","calc":"2 (2.3)","match":true},{"label":"CM_class(CARDIOVASCULAR,Placebo)","tfl":"3 (3.5)","calc":"3 (3.5)","match":true},{"label":"CM_class(NERVOUS SYSTEM,Placebo)","tfl":"43 (50.0)","calc":"43 (50.0)","match":true}]},
+      {"id":"T-11","title":"Table 14.5.2 — Summary of Medical History by Body System","type":"Table","vtype":"medhist","status":"PASS","passed":81,"total":81,"details":[{"label":"AnyMH(Placebo)","tfl":"86 (100.0)","calc":"86 (100.0)","match":true},{"label":"AnyMH(Xanomeline High Dose)","tfl":"72 (100.0)","calc":"72 (100.0)","match":true},{"label":"AnyMH(Xanomeline Low Dose)","tfl":"96 (100.0)","calc":"96 (100.0)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Placebo)","tfl":"17 (19.8)","calc":"17 (19.8)","match":true},{"label":"MH_SOC(NERVOUS SYSTEM,Placebo)","tfl":"86 (100.0)","calc":"86 (100.0)","match":true},{"label":"MH_SOC(VASCULAR DISORDERS,Placebo)","tfl":"51 (59.3)","calc":"51 (59.3)","match":true}]}
+    ]
+  }
 };
 
 let currentVersion = 'pro';
@@ -192,12 +300,15 @@ let currentTab = 'dashboard';
 let expandedRow = null;
 
 const TABS = [
-  {id:'dashboard',label:'Dashboard',icon:'📊'},
-  {id:'tables',label:'TFL Results',icon:'📋',countKey:'tables'},
-  {id:'listings',label:'Listings',icon:'📃',countKey:'listings'},
-  {id:'audit',label:'Audit Trail',icon:'📁',countKey:'audit'},
-  {id:'specs',label:'ADaM Specs',icon:'📐',countKey:'specs'},
-  {id:'compare',label:'Free vs Pro',icon:'⚖️'},
+  {id:'dashboard',label:'Dashboard',icon:'&#x1F4CA;'},
+  {id:'tables',label:'TFL Results',icon:'&#x1F4CB;',countKey:'tables'},
+  {id:'listings',label:'Listings',icon:'&#x1F4C3;',countKey:'listings'},
+  {id:'protocol',label:'Protocol & SAP',icon:'&#x1F4D1;'},
+  {id:'sas',label:'SAS Programs',icon:'&#x1F4BB;'},
+  {id:'queries',label:'Queries',icon:'&#x2753;',countKey:'queries'},
+  {id:'audit',label:'Audit Trail',icon:'&#x1F4C1;',countKey:'audit'},
+  {id:'specs',label:'ADaM Specs',icon:'&#x1F4D0;',countKey:'specs'},
+  {id:'compare',label:'Free vs Pro',icon:'&#x2696;'},
 ];
 
 function getStats(ver) {
@@ -233,12 +344,11 @@ function toggleRow(id) {
 
 function render() {
   const s = getStats(currentVersion);
-  // Header badges
   document.getElementById('studyBadge').textContent = 'Study: ' + s.study.study_id;
   const now = new Date();
   document.getElementById('dateBadge').textContent = now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}) + ' ' + now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
   document.getElementById('versionDesc').textContent = currentVersion === 'pro'
-    ? `CDISCPILOT01 — ${s.study.indication || s.study.phase} — ${s.total} TFLs, ${s.totalChecks} checks`
+    ? `CDISCPILOT01 — ${s.study.indication} — ${s.total} TFLs, ${s.totalChecks} checks`
     : `Synthetic demo — ${s.total} TFLs, ${s.totalChecks} checks`;
 
   // Tabs
@@ -248,6 +358,7 @@ function render() {
     else if (t.countKey === 'listings') count = s.listings.length;
     else if (t.countKey === 'audit') count = s.totalChecks;
     else if (t.countKey === 'specs') count = s.results.length * 3;
+    else if (t.countKey === 'queries') count = currentVersion === 'free' ? 3 : 0;
     const countBadge = count !== '' ? `<span class="tab-count${count==0?' zero':''}">${count}</span>` : '';
     const active = currentTab === t.id ? ' active' : '';
     return `<button class="tab-btn${active}" onclick="switchTab('${t.id}')"><span class="icon">${t.icon}</span>${t.label}${countBadge}</button>`;
@@ -261,19 +372,15 @@ function renderContent() {
   const s = getStats(currentVersion);
   let html = '';
 
-  if (currentTab === 'dashboard') {
-    html = renderDashboard(s);
-  } else if (currentTab === 'tables') {
-    html = renderResultsTable(s.tables, 'Table Results');
-  } else if (currentTab === 'listings') {
-    html = renderResultsTable(s.listings, 'Listing Results');
-  } else if (currentTab === 'audit') {
-    html = renderAudit(s);
-  } else if (currentTab === 'specs') {
-    html = renderSpecs(s);
-  } else if (currentTab === 'compare') {
-    html = renderCompare();
-  }
+  if (currentTab === 'dashboard') html = renderDashboard(s);
+  else if (currentTab === 'tables') html = renderResultsTable(s.tables, 'Table Results');
+  else if (currentTab === 'listings') html = renderResultsTable(s.listings, 'Listing Results');
+  else if (currentTab === 'protocol') html = renderProtocol(s);
+  else if (currentTab === 'sas') html = renderSAS(s);
+  else if (currentTab === 'queries') html = renderQueries(s);
+  else if (currentTab === 'audit') html = renderAudit(s);
+  else if (currentTab === 'specs') html = renderSpecs(s);
+  else if (currentTab === 'compare') html = renderCompare();
 
   document.getElementById('mainContent').innerHTML = html;
 }
@@ -285,10 +392,10 @@ function renderDashboard(s) {
     <div class="stat-cards">
       <div class="stat-card blue"><div class="card-label">TFLs Validated</div><div class="card-num">${s.total}</div><div class="card-sub">Primary Analysis</div></div>
       <div class="stat-card green"><div class="card-label">Passed</div><div class="card-num">${s.tflPass}</div><div class="card-sub">All checks matched</div></div>
-      <div class="stat-card ${s.tflFail>0?'red':'green'}"><div class="card-label">Failed</div><div class="card-num">${s.tflFail}</div><div class="card-sub">Mismatches found</div></div>
+      <div class="stat-card ${s.tflFail>0?'red':'green'}"><div class="card-label">Failed</div><div class="card-num">${s.tflFail}</div><div class="card-sub">${s.tflFail>0?'Mismatches found':'No mismatches'}</div></div>
       <div class="stat-card blue"><div class="card-label">Total Checks</div><div class="card-num">${s.totalChecks}</div><div class="card-sub">Individual comparisons</div></div>
       <div class="stat-card green"><div class="card-label">Checks Passed</div><div class="card-num">${s.totalPass}</div><div class="card-sub">${s.totalPass}/${s.totalChecks}</div></div>
-      <div class="stat-card ${s.tflFail>0?'red':'green'}"><div class="card-label">Checks Failed</div><div class="card-num">${s.totalChecks - s.totalPass}</div><div class="card-sub">Require review</div></div>
+      <div class="stat-card ${(s.totalChecks-s.totalPass)>0?'red':'green'}"><div class="card-label">Checks Failed</div><div class="card-num">${s.totalChecks - s.totalPass}</div><div class="card-sub">${(s.totalChecks-s.totalPass)>0?'Require review':'Perfect match'}</div></div>
     </div>
     <div class="progress-section">
       <div class="progress-header"><h3>Validation Pass Rate</h3><span class="progress-pct">${pctStr}%</span></div>
@@ -298,17 +405,16 @@ function renderDashboard(s) {
         <div class="legend-item"><span class="legend-dot red"></span>Failed</div>
       </div>
     </div>
-    <div class="section-title"><span class="icon">📋</span>All TFL Results</div>
+    <div class="section-title"><span class="icon">&#x1F4CB;</span>All TFL Results</div>
     ${buildTable(s.results)}
   `;
 }
 
 function renderResultsTable(items, title) {
-  return `<div class="section-title"><span class="icon">📋</span>${title}</div>${buildTable(items)}`;
+  return `<div class="section-title"><span class="icon">&#x1F4CB;</span>${title}</div>${buildTable(items)}`;
 }
 
 function buildTable(items) {
-  // Determine dataset for each item
   const dsMap = {demographics:'ADSL',disposition:'ADSL',safety_ae:'ADAE',safety_ae_grade:'ADAE',safety_sae:'ADAE',
     listing:'—',lab_summary:'ADLB',vitals_summary:'ADVS',exposure:'ADSL',conmeds:'ADCM',medhist:'ADMH'};
   let rows = items.map(r => {
@@ -323,17 +429,16 @@ function buildTable(items) {
       <td><span class="type-badge">${typeLabel}</span></td>
       <td>${r.title}</td>
       <td><span class="ds-badge">${ds}</span></td>
-      <td><span class="status-badge ${r.status.toLowerCase()}"><span class="dot"></span>${r.status === 'PASS' ? '✓ PASSED' : '✗ FAILED'}</span></td>
+      <td><span class="status-badge ${r.status.toLowerCase()}"><span class="dot"></span>${r.status === 'PASS' ? '&#10003; PASSED' : '&#10007; FAILED'}</span></td>
       <td class="checks-text"><span>${r.passed}/${r.total}</span></td>
       <td class="match-rate ${rateClass}">${rate}%</td>
     </tr>`;
-    // Detail row
     html += `<tr class="detail-row${expanded?' open':''}"><td colspan="7"><div class="detail-inner">`;
     if (r.details && r.details.length > 0) {
       html += '<div class="detail-grid">';
       r.details.forEach(d => {
         const cls = d.match ? 'pass' : 'fail';
-        const icon = d.match ? '✓' : '✗';
+        const icon = d.match ? '&#10003;' : '&#10007;';
         html += `<div class="detail-item ${cls}"><span class="d-label" title="${d.label}">${d.label}</span><span class="d-vals">${icon} TFL=${d.tfl||'None'} | Calc=${d.calc||'None'}</span></div>`;
       });
       html += '</div>';
@@ -351,6 +456,91 @@ function buildTable(items) {
   </table>`;
 }
 
+function renderProtocol(s) {
+  return `
+    <div class="section-title"><span class="icon">&#x1F4D1;</span>Protocol & Statistical Analysis Plan</div>
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <h4>&#x1F4C4; Protocol Information</h4>
+        <div class="p-row"><span class="p-label">Protocol ID</span><span class="p-value">${s.study.protocol}</span></div>
+        <div class="p-row"><span class="p-label">Study ID</span><span class="p-value">${s.study.study_id}</span></div>
+        <div class="p-row"><span class="p-label">Sponsor</span><span class="p-value">${s.study.sponsor}</span></div>
+        <div class="p-row"><span class="p-label">Phase</span><span class="p-value">${s.study.phase}</span></div>
+        <div class="p-row"><span class="p-label">Indication</span><span class="p-value">${s.study.indication}</span></div>
+        <div class="p-row"><span class="p-label">CRO / Validator</span><span class="p-value">${s.study.cro}</span></div>
+      </div>
+      <div class="protocol-card">
+        <h4>&#x1F4CA; SAP Summary</h4>
+        <div class="p-row"><span class="p-label">Analysis Type</span><span class="p-value">${s.study.analysis}</span></div>
+        <div class="p-row"><span class="p-label">Population</span><span class="p-value">Safety (SAFFL = Y)</span></div>
+        <div class="p-row"><span class="p-label">Tables Validated</span><span class="p-value">${s.tables.length} tables</span></div>
+        <div class="p-row"><span class="p-label">Listings Validated</span><span class="p-value">${s.listings.length} listings</span></div>
+        <div class="p-row"><span class="p-label">Statistical Checks</span><span class="p-value">${s.totalChecks} comparisons</span></div>
+        <div class="p-row"><span class="p-label">Generated By</span><span class="p-value">${s.study.generated_by}</span></div>
+      </div>
+    </div>
+    <div class="protocol-card">
+      <h4>&#x1F4DD; Validation Methodology</h4>
+      <div class="p-row"><span class="p-label">Step 1</span><span class="p-value">Load ADaM datasets (CSV) and apply population filters per SAP</span></div>
+      <div class="p-row"><span class="p-label">Step 2</span><span class="p-value">Compute summary statistics independently from source data using pandas</span></div>
+      <div class="p-row"><span class="p-label">Step 3</span><span class="p-value">Parse TFL document (docx/RTF) and extract cell values from tables</span></div>
+      <div class="p-row"><span class="p-label">Step 4</span><span class="p-value">Compare TFL values vs. independently computed values with configurable tolerance</span></div>
+      <div class="p-row"><span class="p-label">Step 5</span><span class="p-value">Generate validation report with full audit trail and comparison details</span></div>
+    </div>
+  `;
+}
+
+function renderSAS(s) {
+  const programs = [
+    {name:'t_dm.sas', desc:'Demographics and Baseline Characteristics', tfl:'T-01', status:'validated', output:'t14_1_1.rtf'},
+    {name:'t_disp.sas', desc:'Subject Disposition', tfl:'T-02', status:'validated', output:'t14_1_2.rtf'},
+    {name:'t_ae_overall.sas', desc:'Overall Summary of TEAEs', tfl:'T-03', status:'validated', output:'t14_3_1.rtf'},
+    {name:'t_ae_sev.sas', desc:'TEAEs by Maximum Severity', tfl:'T-06', status:'validated', output:'t14_3_4.rtf'},
+    {name:'t_sae.sas', desc:'Serious Adverse Events', tfl:'T-05', status:'validated', output:'t14_3_3.rtf'},
+    {name:'t_exposure.sas', desc:'Exposure to Study Treatment', tfl:'T-07', status: currentVersion==='pro'?'validated':'pending', output:'t14_2_1.rtf'},
+    {name:'t_lab.sas', desc:'Selected Laboratory Results', tfl:'T-08', status: currentVersion==='pro'?'validated':'pending', output:'t14_4_1.rtf'},
+    {name:'t_vitals.sas', desc:'Vital Signs Summary', tfl:'T-09', status: currentVersion==='pro'?'validated':'pending', output:'t14_4_2.rtf'},
+    {name:'t_conmeds.sas', desc:'Concomitant Medications by ATC Class', tfl:'T-10', status: currentVersion==='pro'?'validated':'pending', output:'t14_5_1.rtf'},
+    {name:'t_medhist.sas', desc:'Medical History by Body System', tfl:'T-11', status: currentVersion==='pro'?'validated':'pending', output:'t14_5_2.rtf'},
+    {name:'l_teae.sas', desc:'TEAE Listing', tfl:'L-01', status:'validated', output:'l16_2_7_1.rtf'},
+    {name:'l_sae.sas', desc:'SAE Listing', tfl:'L-02', status:'validated', output:'l16_2_7_2.rtf'},
+    {name:'l_death.sas', desc:'Deaths Listing', tfl:'L-03', status:'validated', output:'l16_2_7_3.rtf'},
+  ];
+  const rows = programs.map(p => `<tr>
+    <td class="prog-name">${p.name}</td>
+    <td>${p.desc}</td>
+    <td style="font-weight:600;color:var(--accent)">${p.tfl}</td>
+    <td><code style="font-size:0.78rem;background:#f1f5f9;padding:2px 8px;border-radius:4px">${p.output}</code></td>
+    <td><span class="prog-status ${p.status}">${p.status === 'validated' ? '&#10003; Validated' : '&#9711; Pending'}</span></td>
+  </tr>`).join('');
+
+  return `<div class="section-title"><span class="icon">&#x1F4BB;</span>SAS Programs — TFL Generation & Validation Status</div>
+    <table class="sas-table">
+      <thead><tr><th>Program</th><th>Description</th><th>TFL</th><th>Output</th><th>Status</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderQueries(s) {
+  if (currentVersion === 'pro') {
+    return `<div class="info-panel" style="text-align:center;padding:48px">
+      <h3 style="color:var(--green)">&#10003; No Open Queries</h3>
+      <p>All ${s.total} TFLs passed validation with ${s.totalChecks} checks — 100% match rate.<br>No queries or discrepancies to resolve.</p>
+    </div>`;
+  }
+  const queries = [
+    {title:'T-01: AGE Mean mismatch for Drug B 20mg', status:'open', body:'TFL shows 56.7 but independently computed value is 54.4. Difference of 2.3 exceeds tolerance of 0.15. Possible rounding or data filter issue in SAS program.', meta:'Opened: 04 Mar 2026 — Assigned to: Biostatistics'},
+    {title:'T-03: Related AE counts differ across all arms', status:'critical', body:'Related AE counts differ significantly for all 3 treatment arms. TFL uses broader causality definition (POSSIBLE + PROBABLE + DEFINITE) but validator computes only PROBABLE + DEFINITE. Requires SAP clarification on AEREL categorization.', meta:'Opened: 04 Mar 2026 — Priority: Critical — Assigned to: Medical Writing + Biostatistics'},
+    {title:'T-01: Demographics — additional BMI/RACE checks needed', status:'open', body:'Current demographics validation covers AGE and SEX. BMI continuous statistics and full RACE category breakdowns not yet validated. Pro version includes these.', meta:'Opened: 04 Mar 2026 — Assigned to: Validation Team'},
+  ];
+  return `<div class="section-title"><span class="icon">&#x2753;</span>Queries & Discrepancies (${queries.length} open)</div>
+    ${queries.map(q => `<div class="query-card">
+      <div class="q-header"><span class="q-title">${q.title}</span><span class="q-badge ${q.status}">${q.status.toUpperCase()}</span></div>
+      <div class="q-body">${q.body}</div>
+      <div class="q-meta">${q.meta}</div>
+    </div>`).join('')}`;
+}
+
 function renderAudit(s) {
   let entries = [];
   s.results.forEach(r => {
@@ -360,14 +550,14 @@ function renderAudit(s) {
   });
   entries.push({time:'00:00:04',msg:`Validation complete. ${s.tflPass}/${s.total} TFLs passed, ${s.totalPass}/${s.totalChecks} checks matched.`});
 
-  return `<div class="section-title"><span class="icon">📁</span>Audit Trail (${entries.length} entries)</div>
+  return `<div class="section-title"><span class="icon">&#x1F4C1;</span>Audit Trail (${entries.length} entries)</div>
     <div class="audit-panel">${entries.map(e => `<div class="audit-entry"><div class="a-time">${e.time}</div><div class="a-msg">${e.msg}</div></div>`).join('')}</div>`;
 }
 
 function renderSpecs(s) {
   const vars = ['USUBJID','TRT01A','SAFFL','AGE','SEX','RACE','AEBODSYS','AEDECOD','AESER','AEREL','TRTEMFL','PARAMCD','AVAL','ABLFL','ANL01FL','MHBODSYS','CMCLAS','TRTDURD'];
   let rows = vars.map(v => `<tr><td style="font-weight:600;font-family:monospace">${v}</td><td>${getVarDesc(v)}</td><td>${getVarDomain(v)}</td></tr>`).join('');
-  return `<div class="section-title"><span class="icon">📐</span>ADaM Specifications — Key Variables</div>
+  return `<div class="section-title"><span class="icon">&#x1F4D0;</span>ADaM Specifications — Key Variables</div>
     <table class="results-table"><thead><tr><th>Variable</th><th>Description</th><th>Domain</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
@@ -376,30 +566,102 @@ function getVarDomain(v){const m={USUBJID:'ADSL',TRT01A:'ADSL',SAFFL:'ADSL',AGE:
 
 function renderCompare() {
   const fs = getStats('free'), ps = getStats('pro');
-  return `<div class="info-panel">
-    <h3>Free vs Pro Comparison</h3>
-    <p>Both versions use the same core validation engine. Pro adds expanded domain coverage, real study data, and full audit trail.</p>
-    <table class="tier-table">
-      <tr><th>Metric</th><th>Free (OSS)</th><th>Pro</th></tr>
-      <tr><td>TFLs Validated</td><td>${fs.total}</td><td><strong>${ps.total}</strong></td></tr>
-      <tr><td>Statistical Checks</td><td>${fs.totalChecks}</td><td><strong>${ps.totalChecks}</strong></td></tr>
-      <tr><td>Pass Rate</td><td>${fs.pct.toFixed(1)}%</td><td><strong>${ps.pct.toFixed(1)}%</strong></td></tr>
-      <tr><td>Study Data</td><td>Synthetic</td><td><strong>Real (CDISCPILOT01)</strong></td></tr>
-    </table>
-    <table class="tier-table" style="margin-top:24px">
-      <tr><th>Validator Module</th><th>Free</th><th>Pro</th></tr>
-      <tr><td>Demographics</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>AE Summary / SOC / PT</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>SAE & AE by Severity</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>Listing Validation</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>Disposition</td><td class="dash">—</td><td class="check">✓</td></tr>
-      <tr><td>Lab Results Summary</td><td class="dash">—</td><td class="check">✓</td></tr>
-      <tr><td>Vital Signs Summary</td><td class="dash">—</td><td class="check">✓</td></tr>
-      <tr><td>Exposure / Duration</td><td class="dash">—</td><td class="check">✓</td></tr>
-      <tr><td>Concomitant Medications</td><td class="dash">—</td><td class="check">✓</td></tr>
-      <tr><td>Medical History</td><td class="dash">—</td><td class="check">✓</td></tr>
-    </table>
-  </div>`;
+  return `
+    <div class="compare-hero">
+      <h2>Free (OSS) vs Pro Edition</h2>
+      <p>Both versions share the same core validation engine. Pro expands coverage with 5 additional validator modules and runs against real CDISC study data.</p>
+    </div>
+
+    <div class="compare-cards">
+      <div class="compare-card free">
+        <span class="tier-badge">Free / Open Source</span>
+        <div class="tier-title">Community Edition</div>
+        <div class="tier-sub">Core safety + listing validation with synthetic demo data</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="s-num">${fs.total}</div><div class="s-lbl">TFLs</div></div>
+          <div class="tier-stat"><div class="s-num">${fs.totalChecks}</div><div class="s-lbl">Checks</div></div>
+          <div class="tier-stat"><div class="s-num">${fs.pct.toFixed(0)}%</div><div class="s-lbl">Pass Rate</div></div>
+          <div class="tier-stat"><div class="s-num">${fs.tflFail}</div><div class="s-lbl">Failures</div></div>
+        </div>
+        <ul class="tier-features">
+          <li><span class="feat-icon yes">&#10003;</span>Demographics (AGE, BMI, SEX, RACE)</li>
+          <li><span class="feat-icon yes">&#10003;</span>AE Summary by SOC + Preferred Term</li>
+          <li><span class="feat-icon yes">&#10003;</span>SAE &amp; AE by Severity Grade</li>
+          <li><span class="feat-icon yes">&#10003;</span>Disposition (Safety Pop N)</li>
+          <li><span class="feat-icon yes">&#10003;</span>Listing Row-Count Validation</li>
+          <li><span class="feat-icon no">—</span>Lab Results Summary</li>
+          <li><span class="feat-icon no">—</span>Vital Signs Summary</li>
+          <li><span class="feat-icon no">—</span>Exposure / Duration</li>
+          <li><span class="feat-icon no">—</span>Concomitant Medications</li>
+          <li><span class="feat-icon no">—</span>Medical History</li>
+        </ul>
+      </div>
+
+      <div class="compare-card pro">
+        <div class="pro-ribbon">Recommended</div>
+        <span class="tier-badge">Pro Edition</span>
+        <div class="tier-title">Enterprise Validation</div>
+        <div class="tier-sub">Full domain coverage against real CDISCPILOT01 pharmaverseadam data</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="s-num">${ps.total}</div><div class="s-lbl">TFLs</div></div>
+          <div class="tier-stat"><div class="s-num">${ps.totalChecks}</div><div class="s-lbl">Checks</div></div>
+          <div class="tier-stat"><div class="s-num">${ps.pct.toFixed(0)}%</div><div class="s-lbl">Pass Rate</div></div>
+          <div class="tier-stat"><div class="s-num">${ps.tflFail}</div><div class="s-lbl">Failures</div></div>
+        </div>
+        <ul class="tier-features">
+          <li><span class="feat-icon yes">&#10003;</span>Demographics (AGE, BMI, SEX, RACE)</li>
+          <li><span class="feat-icon yes">&#10003;</span>AE Summary by SOC + Preferred Term</li>
+          <li><span class="feat-icon yes">&#10003;</span>SAE &amp; AE by Severity Grade</li>
+          <li><span class="feat-icon yes">&#10003;</span>Disposition (Safety Pop N)</li>
+          <li><span class="feat-icon yes">&#10003;</span>Listing Row-Count Validation</li>
+          <li><span class="feat-icon pro-only">&#9733;</span>Lab Results Summary (ADLB)</li>
+          <li><span class="feat-icon pro-only">&#9733;</span>Vital Signs Summary (ADVS)</li>
+          <li><span class="feat-icon pro-only">&#9733;</span>Exposure / Duration (ADSL)</li>
+          <li><span class="feat-icon pro-only">&#9733;</span>Concomitant Medications (ADCM)</li>
+          <li><span class="feat-icon pro-only">&#9733;</span>Medical History (ADMH)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-grid-title">Detailed Feature Comparison</div>
+      <table class="feature-table">
+        <thead><tr><th>Feature</th><th>Free (OSS)</th><th>Pro</th></tr></thead>
+        <tbody>
+          <tr class="cat-row"><td colspan="3">Validator Modules</td></tr>
+          <tr><td>Demographics &amp; Baseline</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Subject Disposition</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>TEAE Summary (SOC + PT)</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>AE by Severity Grade</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Serious Adverse Events</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Listing Validation</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Exposure / Treatment Duration</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+          <tr><td>Lab Results (Mean/SD by visit)</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+          <tr><td>Vital Signs (Mean/SD by visit)</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+          <tr><td>Concomitant Medications (ATC Class)</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+          <tr><td>Medical History (Body System)</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+
+          <tr class="cat-row"><td colspan="3">Data &amp; Configuration</td></tr>
+          <tr><td>Study Data</td><td>Synthetic (35 subjects)</td><td class="ft-pro">Real CDISCPILOT01 (254 subjects)</td></tr>
+          <tr><td>ADaM Datasets Used</td><td>ADSL, ADAE</td><td class="ft-pro">ADSL, ADAE, ADLB, ADVS, ADCM, ADMH</td></tr>
+          <tr><td>Configurable Column Mapping</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Configurable Variable Mapping</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Configurable Rounding Rules</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+
+          <tr class="cat-row"><td colspan="3">Reporting &amp; Audit</td></tr>
+          <tr><td>Excel Validation Report</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Interactive HTML Portal</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Full Audit Trail</td><td class="ft-yes">&#10003;</td><td class="ft-yes">&#10003;</td></tr>
+          <tr><td>Sponsor-Ready Report</td><td class="ft-no">—</td><td class="ft-pro">&#9733; Pro</td></tr>
+
+          <tr class="cat-row"><td colspan="3">Metrics</td></tr>
+          <tr><td>TFLs Validated</td><td>${fs.total}</td><td class="ft-pro"><strong>${ps.total}</strong></td></tr>
+          <tr><td>Statistical Checks</td><td>${fs.totalChecks}</td><td class="ft-pro"><strong>${ps.totalChecks}</strong></td></tr>
+          <tr><td>Overall Pass Rate</td><td>${fs.pct.toFixed(1)}%</td><td class="ft-pro"><strong>${ps.pct.toFixed(1)}%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
 // Init
