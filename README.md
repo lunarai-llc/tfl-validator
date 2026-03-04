@@ -4,6 +4,21 @@ Open-source validation engine for clinical trial **Tables, Figures & Listings (T
 
 Independently recalculates statistics from ADaM datasets, compares against TFL outputs, and generates audit-ready validation reports — built for biostatisticians, statistical programmers, and CROs working under ICH E9 / 21 CFR Part 11.
 
+## Capabilities
+
+- ✅ Load any ADaM datasets (CSV/Excel) and apply population filters
+- ✅ Parse TFL documents (DOCX, PDF, TXT/LST)
+- ✅ Validate demographics tables — N per arm, mean, SD, median, min/max, frequency distributions
+- ✅ Validate AE summary tables — any TEAE, any SAE, drug-related AEs, SOC/PT breakdown
+- ✅ Validate AE by grade and serious AE tables
+- ✅ Validate subject disposition — N enrolled, N safety population
+- ✅ Validate listings — row count checks with per-arm subject/event breakdown
+- ✅ Structural checks for lab, vitals, efficacy, and exposure tables
+- ✅ Generate a full Excel report with color-coded PASS/FAIL, per-TFL detail sheets, and a regulatory-grade audit trail
+- ✅ Config-driven setup via `study_config.xlsx` — no Python required
+- ✅ Override ADaM variable names, column mappings, and rounding precision per study
+- ✅ CLI support (`tfl-validate --config ...`)
+
 ## Quick Start
 
 ```bash
