@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tfl-validator"
+version = "1.0.0"
+description = "Open-source validation engine for clinical trial Tables, Figures & Listings (TFLs)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Lunar AI", email = "info@lunarai.llc" }]
+requires-python = ">=3.8"
+keywords = ["clinical-trials", "cdisc", "adam", "tfl", "validation", "statistics"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+dependencies = [
+    "pandas>=1.5.0",
+    "numpy>=1.21.0",
+    "openpyxl>=3.0.0",
+    "python-docx>=0.8.11",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "flake8>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/lunar-ai/tfl-validator"
+Documentation = "https://github.com/lunar-ai/tfl-validator/blob/main/README.md"
+Repository = "https://github.com/lunar-ai/tfl-validator.git"
+"Bug Tracker" = "https://github.com/lunar-ai/tfl-validator/issues"
+
+[project.scripts]
+tfl-validate = "tfl_validator.cli:main"
+
+[tool.setuptools]
+packages = ["tfl_validator", "tfl_validator.engine", "tfl_validator.parsers", "tfl_validator.stats", "tfl_validator.rules", "tfl_validator.validators", "tfl_validator.report"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 100

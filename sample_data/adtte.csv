@@ -1,0 +1,36 @@
+USUBJID,TRT01A,PARAMCD,PARAM,AVAL,CNSR,SAFFL,ITTFL
+SUBJ-002,Drug B 20mg,OS,Overall Survival,8.7,0,Y,Y
+SUBJ-003,Drug B 20mg,OS,Overall Survival,31.1,1,Y,Y
+SUBJ-004,Drug A 10mg,OS,Overall Survival,28.7,1,Y,Y
+SUBJ-005,Placebo,OS,Overall Survival,13.6,0,Y,Y
+SUBJ-006,Placebo,OS,Overall Survival,11.0,1,Y,Y
+SUBJ-007,Placebo,OS,Overall Survival,20.4,1,Y,Y
+SUBJ-008,Drug B 20mg,OS,Overall Survival,20.9,1,Y,Y
+SUBJ-009,Drug A 10mg,OS,Overall Survival,16.6,1,Y,Y
+SUBJ-010,Drug B 20mg,OS,Overall Survival,33.4,1,Y,Y
+SUBJ-011,Placebo,OS,Overall Survival,4.0,0,Y,Y
+SUBJ-012,Drug B 20mg,OS,Overall Survival,24.1,1,Y,Y
+SUBJ-013,Drug B 20mg,OS,Overall Survival,13.4,0,Y,Y
+SUBJ-014,Placebo,OS,Overall Survival,23.9,0,Y,Y
+SUBJ-015,Placebo,OS,Overall Survival,22.1,1,Y,Y
+SUBJ-017,Placebo,OS,Overall Survival,8.2,0,Y,Y
+SUBJ-018,Drug A 10mg,OS,Overall Survival,14.0,1,Y,Y
+SUBJ-019,Drug A 10mg,OS,Overall Survival,30.7,1,Y,Y
+SUBJ-020,Placebo,OS,Overall Survival,34.7,1,Y,Y
+SUBJ-021,Drug A 10mg,OS,Overall Survival,34.5,1,Y,Y
+SUBJ-024,Drug A 10mg,OS,Overall Survival,12.0,1,Y,Y
+SUBJ-025,Drug A 10mg,OS,Overall Survival,24.9,1,Y,Y
+SUBJ-026,Drug B 20mg,OS,Overall Survival,13.2,1,Y,Y
+SUBJ-027,Placebo,OS,Overall Survival,5.0,0,Y,Y
+SUBJ-028,Drug A 10mg,OS,Overall Survival,15.5,0,Y,Y
+SUBJ-029,Drug A 10mg,OS,Overall Survival,14.4,0,Y,Y
+SUBJ-030,Placebo,OS,Overall Survival,22.7,0,Y,Y
+SUBJ-031,Drug A 10mg,OS,Overall Survival,22.1,1,Y,Y
+SUBJ-032,Placebo,OS,Overall Survival,22.7,1,Y,Y
+SUBJ-033,Placebo,OS,Overall Survival,14.6,0,Y,Y
+SUBJ-034,Drug B 20mg,OS,Overall Survival,12.7,1,Y,Y
+SUBJ-035,Drug B 20mg,OS,Overall Survival,12.0,1,Y,Y
+SUBJ-037,Placebo,OS,Overall Survival,23.1,1,Y,Y
+SUBJ-038,Placebo,OS,Overall Survival,31.6,1,Y,Y
+SUBJ-039,Drug B 20mg,OS,Overall Survival,38.5,1,Y,Y
+SUBJ-040,Drug A 10mg,OS,Overall Survival,25.3,0,Y,Y

@@ -1,0 +1,97 @@
+USUBJID,TRT01A,AEBODSYS,AEDECOD,AESER,AEREL,AESEV,TRTEMFL,SAFFL
+SUBJ-002,Drug B 20mg,Nervous system disorders,Dizziness,N,NOT RELATED,MILD,Y,Y
+SUBJ-003,Drug B 20mg,Gastrointestinal disorders,Nausea,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-003,Drug B 20mg,Gastrointestinal disorders,Nausea,N,RELATED,MILD,Y,Y
+SUBJ-003,Drug B 20mg,Skin and subcutaneous tissue disorders,Rash,N,RELATED,MODERATE,Y,Y
+SUBJ-003,Drug B 20mg,Gastrointestinal disorders,Diarrhoea,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-003,Drug B 20mg,Nervous system disorders,Somnolence,N,RELATED,MODERATE,Y,Y
+SUBJ-003,Drug B 20mg,Musculoskeletal disorders,Myalgia,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-003,Drug B 20mg,Gastrointestinal disorders,Abdominal pain,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-003,Drug B 20mg,Gastrointestinal disorders,Vomiting,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-004,Drug A 10mg,Gastrointestinal disorders,Diarrhoea,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-004,Drug A 10mg,Musculoskeletal disorders,Myalgia,N,RELATED,SEVERE,Y,Y
+SUBJ-004,Drug A 10mg,General disorders,Fatigue,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-004,Drug A 10mg,General disorders,Pyrexia,N,NOT RELATED,MILD,Y,Y
+SUBJ-004,Drug A 10mg,Gastrointestinal disorders,Abdominal pain,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-005,Placebo,Nervous system disorders,Dizziness,Y,NOT RELATED,MILD,Y,Y
+SUBJ-006,Placebo,Skin and subcutaneous tissue disorders,Rash,N,NOT RELATED,MILD,Y,Y
+SUBJ-006,Placebo,Musculoskeletal disorders,Back pain,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-007,Placebo,Musculoskeletal disorders,Arthralgia,N,RELATED,SEVERE,Y,Y
+SUBJ-007,Placebo,Musculoskeletal disorders,Back pain,N,NOT RELATED,MILD,Y,Y
+SUBJ-008,Drug B 20mg,General disorders,Fatigue,Y,NOT RELATED,MILD,Y,Y
+SUBJ-008,Drug B 20mg,Skin and subcutaneous tissue disorders,Pruritus,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-009,Drug A 10mg,Gastrointestinal disorders,Diarrhoea,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-009,Drug A 10mg,Musculoskeletal disorders,Arthralgia,N,RELATED,SEVERE,Y,Y
+SUBJ-009,Drug A 10mg,Skin and subcutaneous tissue disorders,Rash,N,NOT RELATED,MILD,Y,Y
+SUBJ-010,Drug B 20mg,Gastrointestinal disorders,Nausea,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-011,Placebo,Skin and subcutaneous tissue disorders,Pruritus,N,RELATED,MILD,Y,Y
+SUBJ-011,Placebo,Nervous system disorders,Dizziness,N,RELATED,MILD,Y,Y
+SUBJ-012,Drug B 20mg,Gastrointestinal disorders,Nausea,N,NOT RELATED,MILD,Y,Y
+SUBJ-012,Drug B 20mg,Musculoskeletal disorders,Back pain,Y,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-013,Drug B 20mg,Nervous system disorders,Somnolence,Y,RELATED,MILD,Y,Y
+SUBJ-013,Drug B 20mg,Gastrointestinal disorders,Diarrhoea,N,RELATED,MODERATE,Y,Y
+SUBJ-014,Placebo,Gastrointestinal disorders,Nausea,Y,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-014,Placebo,Musculoskeletal disorders,Back pain,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-014,Placebo,Nervous system disorders,Dizziness,N,RELATED,MILD,Y,Y
+SUBJ-014,Placebo,Gastrointestinal disorders,Vomiting,N,RELATED,MODERATE,Y,Y
+SUBJ-014,Placebo,Nervous system disorders,Somnolence,N,NOT RELATED,MILD,Y,Y
+SUBJ-015,Placebo,Musculoskeletal disorders,Arthralgia,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-015,Placebo,Skin and subcutaneous tissue disorders,Pruritus,N,NOT RELATED,MILD,Y,Y
+SUBJ-015,Placebo,General disorders,Oedema peripheral,N,NOT RELATED,MILD,Y,Y
+SUBJ-015,Placebo,Skin and subcutaneous tissue disorders,Pruritus,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-015,Placebo,Skin and subcutaneous tissue disorders,Pruritus,N,NOT RELATED,MILD,Y,Y
+SUBJ-015,Placebo,Musculoskeletal disorders,Back pain,N,NOT RELATED,MILD,Y,Y
+SUBJ-017,Placebo,General disorders,Pyrexia,N,RELATED,MODERATE,Y,Y
+SUBJ-017,Placebo,Gastrointestinal disorders,Vomiting,N,NOT RELATED,SEVERE,Y,Y
+SUBJ-017,Placebo,Musculoskeletal disorders,Back pain,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-018,Drug A 10mg,Gastrointestinal disorders,Nausea,N,RELATED,MILD,Y,Y
+SUBJ-019,Drug A 10mg,Gastrointestinal disorders,Vomiting,N,RELATED,MODERATE,Y,Y
+SUBJ-019,Drug A 10mg,Musculoskeletal disorders,Arthralgia,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-020,Placebo,Nervous system disorders,Somnolence,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-021,Drug A 10mg,General disorders,Oedema peripheral,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-024,Drug A 10mg,Musculoskeletal disorders,Back pain,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-024,Drug A 10mg,Skin and subcutaneous tissue disorders,Rash,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-024,Drug A 10mg,General disorders,Fatigue,N,RELATED,MILD,Y,Y
+SUBJ-025,Drug A 10mg,Gastrointestinal disorders,Nausea,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-025,Drug A 10mg,General disorders,Fatigue,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-025,Drug A 10mg,Musculoskeletal disorders,Back pain,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-026,Drug B 20mg,Gastrointestinal disorders,Vomiting,Y,RELATED,MODERATE,Y,Y
+SUBJ-027,Placebo,Gastrointestinal disorders,Diarrhoea,N,NOT RELATED,SEVERE,Y,Y
+SUBJ-027,Placebo,General disorders,Pyrexia,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-027,Placebo,Skin and subcutaneous tissue disorders,Rash,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-027,Placebo,Gastrointestinal disorders,Diarrhoea,N,RELATED,MILD,Y,Y
+SUBJ-028,Drug A 10mg,Nervous system disorders,Headache,Y,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-028,Drug A 10mg,Nervous system disorders,Headache,N,RELATED,MILD,Y,Y
+SUBJ-028,Drug A 10mg,General disorders,Pyrexia,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-029,Drug A 10mg,General disorders,Oedema peripheral,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-029,Drug A 10mg,Musculoskeletal disorders,Myalgia,N,RELATED,MILD,Y,Y
+SUBJ-029,Drug A 10mg,Musculoskeletal disorders,Arthralgia,N,NOT RELATED,MILD,Y,Y
+SUBJ-030,Placebo,General disorders,Fatigue,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-030,Placebo,Gastrointestinal disorders,Nausea,N,NOT RELATED,MILD,Y,Y
+SUBJ-030,Placebo,General disorders,Oedema peripheral,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-030,Placebo,Nervous system disorders,Somnolence,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-031,Drug A 10mg,Skin and subcutaneous tissue disorders,Pruritus,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-031,Drug A 10mg,Musculoskeletal disorders,Myalgia,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-031,Drug A 10mg,Musculoskeletal disorders,Arthralgia,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-031,Drug A 10mg,General disorders,Oedema peripheral,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-031,Drug A 10mg,General disorders,Fatigue,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-032,Placebo,General disorders,Pyrexia,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-032,Placebo,Skin and subcutaneous tissue disorders,Rash,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-033,Placebo,Nervous system disorders,Headache,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-033,Placebo,General disorders,Oedema peripheral,N,RELATED,MILD,Y,Y
+SUBJ-033,Placebo,Skin and subcutaneous tissue disorders,Pruritus,N,NOT RELATED,MILD,Y,Y
+SUBJ-034,Drug B 20mg,Musculoskeletal disorders,Arthralgia,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-034,Drug B 20mg,General disorders,Oedema peripheral,N,POSSIBLY RELATED,SEVERE,Y,Y
+SUBJ-035,Drug B 20mg,General disorders,Oedema peripheral,N,NOT RELATED,MILD,Y,Y
+SUBJ-035,Drug B 20mg,Musculoskeletal disorders,Arthralgia,N,NOT RELATED,MODERATE,Y,Y
+SUBJ-035,Drug B 20mg,Skin and subcutaneous tissue disorders,Pruritus,N,RELATED,SEVERE,Y,Y
+SUBJ-035,Drug B 20mg,Gastrointestinal disorders,Abdominal pain,N,RELATED,SEVERE,Y,Y
+SUBJ-037,Placebo,General disorders,Oedema peripheral,N,NOT RELATED,MILD,Y,Y
+SUBJ-037,Placebo,Gastrointestinal disorders,Nausea,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-038,Placebo,Gastrointestinal disorders,Diarrhoea,N,POSSIBLY RELATED,MILD,Y,Y
+SUBJ-038,Placebo,Musculoskeletal disorders,Myalgia,N,NOT RELATED,MILD,Y,Y
+SUBJ-038,Placebo,Nervous system disorders,Headache,Y,RELATED,MODERATE,Y,Y
+SUBJ-039,Drug B 20mg,General disorders,Oedema peripheral,N,RELATED,MILD,Y,Y
+SUBJ-040,Drug A 10mg,Nervous system disorders,Somnolence,N,POSSIBLY RELATED,MODERATE,Y,Y
+SUBJ-040,Drug A 10mg,General disorders,Fatigue,N,NOT RELATED,MILD,Y,Y
+SUBJ-040,Drug A 10mg,Nervous system disorders,Somnolence,N,POSSIBLY RELATED,MODERATE,Y,Y

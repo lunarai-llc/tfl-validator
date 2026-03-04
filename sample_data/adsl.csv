@@ -1,0 +1,41 @@
+USUBJID,TRT01A,AGE,SEX,RACE,BMI,SAFFL,ITTFL,COUNTRY
+SUBJ-001,Drug A 10mg,55,F,Asian,22.7,N,Y,UK
+SUBJ-002,Drug B 20mg,42,M,White,29.6,Y,Y,USA
+SUBJ-003,Drug B 20mg,65,M,White,23.4,Y,Y,Germany
+SUBJ-004,Drug A 10mg,40,M,Black or African American,34.5,Y,Y,USA
+SUBJ-005,Placebo,58,M,White,24.0,Y,Y,UK
+SUBJ-006,Placebo,31,M,Other,26.1,Y,Y,USA
+SUBJ-007,Placebo,39,M,Other,31.2,Y,Y,USA
+SUBJ-008,Drug B 20mg,57,F,White,22.0,Y,Y,Japan
+SUBJ-009,Drug A 10mg,64,M,White,28.5,Y,Y,Germany
+SUBJ-010,Drug B 20mg,57,M,White,33.4,Y,Y,Germany
+SUBJ-011,Placebo,54,F,White,20.3,Y,Y,UK
+SUBJ-012,Drug B 20mg,51,M,White,28.3,Y,Y,USA
+SUBJ-013,Drug B 20mg,37,M,Black or African American,28.7,Y,Y,USA
+SUBJ-014,Placebo,46,F,White,31.0,Y,Y,USA
+SUBJ-015,Placebo,49,M,White,21.9,Y,Y,UK
+SUBJ-016,Placebo,68,M,White,21.6,N,Y,Germany
+SUBJ-017,Placebo,59,M,Asian,29.8,Y,Y,Germany
+SUBJ-018,Drug A 10mg,34,M,White,28.8,Y,Y,USA
+SUBJ-019,Drug A 10mg,59,F,White,28.6,Y,Y,Japan
+SUBJ-020,Placebo,50,F,White,29.1,Y,Y,Germany
+SUBJ-021,Drug A 10mg,47,F,Other,24.4,Y,Y,UK
+SUBJ-022,Placebo,62,F,White,28.5,N,Y,UK
+SUBJ-023,Placebo,67,F,Black or African American,28.8,N,Y,UK
+SUBJ-024,Drug A 10mg,66,M,Black or African American,24.3,Y,Y,USA
+SUBJ-025,Drug A 10mg,45,F,White,35.9,Y,Y,USA
+SUBJ-026,Drug B 20mg,51,M,Black or African American,29.6,Y,Y,Germany
+SUBJ-027,Placebo,59,F,White,22.1,Y,Y,USA
+SUBJ-028,Drug A 10mg,67,F,Black or African American,30.5,Y,Y,USA
+SUBJ-029,Drug A 10mg,49,M,Black or African American,23.1,Y,Y,USA
+SUBJ-030,Placebo,53,M,White,31.0,Y,Y,USA
+SUBJ-031,Drug A 10mg,42,M,White,32.7,Y,Y,Japan
+SUBJ-032,Placebo,41,M,Asian,23.8,Y,Y,Germany
+SUBJ-033,Placebo,65,F,White,31.8,Y,Y,UK
+SUBJ-034,Drug B 20mg,71,F,White,29.4,Y,Y,USA
+SUBJ-035,Drug B 20mg,54,M,White,31.2,Y,Y,UK
+SUBJ-036,Drug B 20mg,67,M,White,36.0,N,Y,UK
+SUBJ-037,Placebo,59,M,Black or African American,26.4,Y,Y,USA
+SUBJ-038,Placebo,47,M,White,24.1,Y,Y,UK
+SUBJ-039,Drug B 20mg,59,M,White,23.5,Y,Y,USA
+SUBJ-040,Drug A 10mg,73,M,White,23.8,Y,Y,UK
