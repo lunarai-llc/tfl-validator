@@ -1,0 +1,7 @@
+USUBJID,TRT01A,PDDT,PDCAT,PDTERM,SAFFL
+SUBJ-012,Drug B 20mg,2025-05-10,Inclusion/Exclusion,Subject did not meet age criteria (below 18),Y
+SUBJ-034,Drug B 20mg,2025-06-22,Dosing,Dose reduction without protocol authorization,Y
+SUBJ-007,Placebo,2025-07-15,Visit Window,Week 12 visit performed 3 days late,Y
+SUBJ-040,Drug A 10mg,2025-08-03,Concomitant Medication,Prohibited medication (ibuprofen) used during study,Y
+SUBJ-015,Placebo,2025-09-11,Study Procedure,Blood draw not performed at specified time,Y
+SUBJ-033,Placebo,2025-10-05,Informed Consent,Consent form signed after first dose,Y

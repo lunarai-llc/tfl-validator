@@ -316,13 +316,19 @@ def get_categorical_vars(tfl_cfg):
 
 
 def find_tfl_value(tables, stat_label, row_context, col_idx, section_context=None):
-    """Search parsed TFL tables for a specific value."""
+    """Search parsed TFL tables for a specific value.
+
+    Supports two table layouts:
+    - Two-text-column: [section] | [statistic] | [val1] | [val2] ...
+      (e.g. demographics) — matches row_context against column 1 (exact)
+    - Single-text-column: [category/row label] | [val1] | [val2] ...
+      (e.g. AE summary, SOC/PT tables) — matches row_context as substring of column 0
+    """
     for tbl in tables:
         in_section = section_context is None
         for _, row in tbl.iterrows():
             row_vals = [str(v).strip() for v in row.values]
             first_col = row_vals[0].lower() if row_vals else ""
-            row_text = " ".join(row_vals).lower()
 
             if section_context and first_col and first_col not in ("", " "):
                 in_section = section_context.lower() in first_col
@@ -331,8 +337,14 @@ def find_tfl_value(tables, stat_label, row_context, col_idx, section_context=Non
                 continue
 
             if len(row_vals) > 1:
+                # Primary: two-column-label tables (demographics) — exact match on col 1
                 stat_col = row_vals[1].lower().strip()
                 if row_context.lower() == stat_col:
+                    if col_idx < len(row_vals):
+                        return row_vals[col_idx]
+
+                # Fallback: single-column-label tables (AE summary, SOC/PT) — substring in col 0
+                if row_context.lower() in row_vals[0].lower():
                     if col_idx < len(row_vals):
                         return row_vals[col_idx]
 
