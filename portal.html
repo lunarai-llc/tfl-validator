@@ -151,6 +151,65 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .findings-table .f-note.mismatch{color:var(--red);font-weight:600}
 .detail-note{margin-top:12px;font-size:0.78rem;color:var(--text-light);font-style:italic}
 
+/* ===== LISTING CARDS TAB ===== */
+.listings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.listings-header h2{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.listings-search{padding:8px 14px 8px 36px;border:1px solid var(--card-border);border-radius:8px;font-family:inherit;font-size:0.82rem;width:240px;background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' stroke='%2394a3b8' stroke-width='2' fill='none'/%3E%3C/svg%3E") 10px center no-repeat;outline:none;transition:border-color .15s}
+.listings-search:focus{border-color:var(--accent)}
+
+.listing-stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.listing-stat{background:var(--white);border:1px solid var(--card-border);border-radius:10px;padding:16px 20px;text-align:center}
+.listing-stat .ls-num{font-size:2rem;font-weight:800;line-height:1.1}
+.listing-stat .ls-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-top:4px}
+.listing-stat.red .ls-num{color:var(--red)}
+.listing-stat.green .ls-num{color:var(--green)}
+
+.filter-bar{display:flex;gap:8px;margin-bottom:20px}
+.filter-btn{padding:6px 16px;border-radius:20px;border:2px solid var(--card-border);background:var(--white);font-family:inherit;font-size:0.78rem;font-weight:600;cursor:pointer;color:var(--text-muted);transition:all .15s;display:flex;align-items:center;gap:5px}
+.filter-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
+.filter-btn.active-green{background:var(--green);color:white;border-color:var(--green)}
+.filter-btn.active-red{background:var(--red);color:white;border-color:var(--red)}
+.filter-btn:hover:not(.active):not(.active-green):not(.active-red){background:#f1f5f9}
+
+.listing-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+.listing-card{border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:transform .15s,box-shadow .15s}
+.listing-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.12)}
+
+.lc-header{padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.lc-header.pass{background:linear-gradient(135deg,var(--navy),#1e3a5f)}
+.lc-header.fail{background:linear-gradient(135deg,#7f1d1d,#991b1b)}
+.lc-header-top{display:flex;justify-content:space-between;align-items:center}
+.lc-id{color:white;font-size:1.3rem;font-weight:800;font-family:'JetBrains Mono',monospace,system-ui}
+.lc-header-badges{display:flex;align-items:center;gap:8px}
+.lc-type-badge{background:rgba(255,255,255,0.2);color:white;padding:3px 10px;border-radius:4px;font-size:0.68rem;font-weight:700;text-transform:uppercase}
+.lc-status-text{color:white;font-size:0.72rem;font-weight:700}
+.lc-title{color:rgba(255,255,255,0.9);font-size:0.82rem;font-weight:400;line-height:1.3}
+.lc-match-track{height:4px;background:rgba(255,255,255,0.2);border-radius:2px;overflow:hidden;margin-top:4px}
+.lc-match-fill{height:100%;border-radius:2px}
+.lc-match-fill.pass{background:#4ade80}
+.lc-match-fill.fail{background:#fca5a5}
+.lc-match-label{color:rgba(255,255,255,0.7);font-size:0.72rem;margin-top:2px}
+
+.lc-body{background:var(--white);padding:16px 20px}
+.lc-arm-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:0.82rem}
+.lc-arm-row:last-of-type{border-bottom:none}
+.lc-arm-name{font-weight:600;color:var(--text)}
+.lc-arm-stats{color:var(--text-muted);font-size:0.78rem}
+.lc-arm-stats span{font-weight:700;color:var(--accent)}
+.lc-arm-stats .pct{color:var(--text-muted);font-weight:400}
+.lc-records{font-size:0.75rem;color:var(--text-light);margin-top:10px;display:flex;align-items:center;gap:4px}
+
+.lc-footer{padding:0 20px 20px;background:var(--white)}
+.lc-detail-btn{width:100%;padding:10px;border:none;border-radius:8px;font-family:inherit;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.lc-detail-btn.pass{background:var(--navy);color:white}
+.lc-detail-btn.pass:hover{background:#243a56}
+.lc-detail-btn.fail{background:#991b1b;color:white}
+.lc-detail-btn.fail:hover{background:#7f1d1d}
+
+@media(max-width:1100px){.listing-cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.listing-cards-grid{grid-template-columns:1fr}}
+
 /* ===== AUDIT TAB ===== */
 .audit-panel{background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:24px}
 .audit-entry{padding:10px 16px;border-left:3px solid var(--accent);background:#f8fafc;border-radius:0 6px 6px 0;margin-bottom:6px;font-size:0.82rem}
@@ -549,7 +608,7 @@ function renderContent() {
 
   if (currentTab === 'dashboard') html = renderDashboard(s);
   else if (currentTab === 'tables') html = renderResultsTable(s.tables, 'Table Results');
-  else if (currentTab === 'listings') html = renderResultsTable(s.listings, 'Listing Results');
+  else if (currentTab === 'listings') html = renderListingsCards(s);
   else if (currentTab === 'protocol') html = renderProtocol(s);
   else if (currentTab === 'sas') html = renderSAS(s);
   else if (currentTab === 'queries') html = renderQueries(s);
@@ -613,6 +672,117 @@ function buildTable(items) {
     <thead><tr><th>TFL ID</th><th>Type</th><th>Title</th><th>Dataset</th><th>Status</th><th>Checks</th><th>Match Rate</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
+}
+
+// Listing arm breakdown data
+const LISTING_ARMS = {
+  free: {
+    'L-01': {rows:96, arms:[{name:'Drug A 10mg',subj:11,events:32,pct:'33.3%'},{name:'Drug B 20mg',subj:10,events:24,pct:'25.0%'},{name:'Placebo',subj:14,events:40,pct:'41.7%'}]},
+    'L-02': {rows:8, arms:[{name:'Drug A 10mg',subj:1,events:1,pct:'12.5%'},{name:'Drug B 20mg',subj:4,events:4,pct:'50.0%'},{name:'Placebo',subj:3,events:3,pct:'37.5%'}]},
+    'L-03': {rows:4, arms:[{name:'Drug A 10mg',subj:0,events:0,pct:'0.0%'},{name:'Drug B 20mg',subj:2,events:2,pct:'50.0%'},{name:'Placebo',subj:2,events:2,pct:'50.0%'}]},
+    'L-04': {rows:40, arms:[{name:'Drug A 10mg',subj:11,events:11,pct:'27.5%'},{name:'Drug B 20mg',subj:10,events:10,pct:'25.0%'},{name:'Placebo',subj:14,events:14,pct:'35.0%'}]},
+    'L-05': {rows:6, arms:[{name:'Drug A 10mg',subj:11,events:11,pct:'31.4%'},{name:'Drug B 20mg',subj:10,events:10,pct:'28.6%'},{name:'Placebo',subj:14,events:14,pct:'40.0%'}]},
+  },
+  pro: {
+    'L-01': {rows:1122, arms:[{name:'Placebo',subj:86,events:277,pct:'24.7%'},{name:'Xanomeline High Dose',subj:72,events:370,pct:'33.0%'},{name:'Xanomeline Low Dose',subj:96,events:475,pct:'42.3%'}]},
+    'L-02': {rows:3, arms:[{name:'Placebo',subj:0,events:0,pct:'0.0%'},{name:'Xanomeline High Dose',subj:1,events:1,pct:'33.3%'},{name:'Xanomeline Low Dose',subj:2,events:2,pct:'66.7%'}]},
+    'L-03': {rows:3, arms:[{name:'Placebo',subj:1,events:1,pct:'33.3%'},{name:'Xanomeline High Dose',subj:1,events:1,pct:'33.3%'},{name:'Xanomeline Low Dose',subj:1,events:1,pct:'33.3%'}]},
+    'L-04': {rows:7510, arms:[{name:'Placebo',subj:86,events:2248,pct:'29.9%'},{name:'Xanomeline High Dose',subj:72,events:2373,pct:'31.6%'},{name:'Xanomeline Low Dose',subj:96,events:2889,pct:'38.5%'}]},
+    'L-05': {rows:1818, arms:[{name:'Placebo',subj:86,events:570,pct:'31.4%'},{name:'Xanomeline High Dose',subj:72,events:519,pct:'28.5%'},{name:'Xanomeline Low Dose',subj:96,events:729,pct:'40.1%'}]},
+  }
+};
+
+let listingFilter = 'all';
+let listingSearch = '';
+
+function setListingFilter(f) {
+  listingFilter = f;
+  renderContent();
+}
+
+function onListingSearch(val) {
+  listingSearch = val.toLowerCase();
+  renderContent();
+}
+
+function renderListingsCards(s) {
+  let listings = s.listings;
+  const totalListings = listings.length;
+  const passedCount = listings.filter(l => l.status === 'PASS').length;
+  const failedCount = totalListings - passedCount;
+  const totalChecks = listings.reduce((a,l) => a + l.total, 0);
+  const passedChecks = listings.reduce((a,l) => a + l.passed, 0);
+  const checkRate = totalChecks > 0 ? (passedChecks / totalChecks * 100).toFixed(0) : 0;
+
+  // Apply filters
+  if (listingFilter === 'pass') listings = listings.filter(l => l.status === 'PASS');
+  else if (listingFilter === 'fail') listings = listings.filter(l => l.status !== 'PASS');
+  if (listingSearch) listings = listings.filter(l => l.title.toLowerCase().includes(listingSearch) || l.id.toLowerCase().includes(listingSearch));
+
+  const cards = listings.map(l => {
+    const isPass = l.status === 'PASS';
+    const cls = isPass ? 'pass' : 'fail';
+    const rate = l.total > 0 ? (l.passed / l.total * 100).toFixed(1) : '0.0';
+    const arms = (LISTING_ARMS[currentVersion] || {})[l.id];
+    const rowCount = arms ? arms.rows : '—';
+
+    let armRows = '';
+    if (arms && arms.arms) {
+      armRows = arms.arms.map(a => `
+        <div class="lc-arm-row">
+          <span class="lc-arm-name">${a.name}</span>
+          <span class="lc-arm-stats">Subj: <span>${a.subj}</span>  Events: <span>${a.events}</span>  <span class="pct">(${a.pct})</span></span>
+        </div>
+      `).join('');
+    }
+
+    return `<div class="listing-card">
+      <div class="lc-header ${cls}">
+        <div class="lc-header-top">
+          <span class="lc-id">${l.id}</span>
+          <div class="lc-header-badges">
+            <span class="lc-type-badge">CDISC Listing</span>
+            <span class="lc-status-text">${isPass ? '&#10003; PASSED' : '&#10007; FAILED'}  ${l.passed}/${l.total} checks</span>
+          </div>
+        </div>
+        <div class="lc-title">${l.title.replace(/^Listing /,'')}</div>
+        <div class="lc-match-track"><div class="lc-match-fill ${cls}" style="width:${rate}%"></div></div>
+        <div class="lc-match-label">Match Rate: ${rate}%</div>
+      </div>
+      <div class="lc-body">
+        ${armRows}
+        <div class="lc-records">&#x1F4CA; ${rowCount} patient records from source data</div>
+      </div>
+      <div class="lc-footer">
+        <button class="lc-detail-btn ${cls}" onclick="toggleRow('${l.id}')">&#x1F4CB; View Details & Patient Data (${rowCount} rows)</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  const allActive = listingFilter === 'all' ? ' active' : '';
+  const passActive = listingFilter === 'pass' ? ' active-green' : '';
+  const failActive = listingFilter === 'fail' ? ' active-red' : '';
+
+  return `
+    <div class="listings-header">
+      <h2>&#x1F4C3; Safety Listings (CDISC Standard)</h2>
+      <input type="text" class="listings-search" placeholder="Search listings..." oninput="onListingSearch(this.value)" value="${listingSearch}">
+    </div>
+    <div class="listing-stat-cards">
+      <div class="listing-stat"><div class="ls-num">${totalListings}</div><div class="ls-label">Total Listings</div></div>
+      <div class="listing-stat green"><div class="ls-num">${passedCount}</div><div class="ls-label">Passed</div></div>
+      <div class="listing-stat ${failedCount > 0 ? 'red' : 'green'}"><div class="ls-num">${failedCount}</div><div class="ls-label">Failed</div></div>
+      <div class="listing-stat"><div class="ls-num">${checkRate}%</div><div class="ls-label">Check Pass Rate</div></div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn${allActive}" onclick="setListingFilter('all')">All</button>
+      <button class="filter-btn${passActive}" onclick="setListingFilter('pass')">&#9989; Passed</button>
+      <button class="filter-btn${failActive}" onclick="setListingFilter('fail')">&#10060; Failed</button>
+    </div>
+    <div class="listing-cards-grid">
+      ${cards}
+    </div>
+  `;
 }
 
 function renderProtocol(s) {
