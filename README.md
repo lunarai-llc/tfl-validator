@@ -32,18 +32,19 @@ python demo.py
 tfl-validate --config study_config.xlsx --output my_report.xlsx
 ```
 
-> 📊 **See what the output looks like before running anything** — check the [`examples/`](examples/) folder for a sample validation report (Excel) generated from the included synthetic dataset.
+## Sample Output
 
-## Demo Output
+> 📊 **Don't want to run code?** Download the pre-generated Excel report directly:
+> **[`examples/TFL_Validation_Report_EXAMPLE.xlsx`](examples/TFL_Validation_Report_EXAMPLE.xlsx)**
+> *(Click the link → Download on GitHub to open in Excel immediately)*
 
-Running `python demo.py` validates 15 TFLs against synthetic oncology data and produces output like this:
+Running `python demo.py` validates 15 TFLs against synthetic oncology data and prints:
 
 ```
 ======================================================================
 Validating: T-01 — Table 14.1.1 — Demographic and Baseline Characteristics
 ======================================================================
   Parsed table: 18 rows × 5 cols
-  Columns: ['Parameter', 'Statistic', 'Drug A 10mg (N=11)', 'Drug B 20mg (N=10)', 'Placebo (N=14)']
   N(Drug A 10mg): TFL=11, Calc=11 → PASS
   N(Drug B 20mg): TFL=10, Calc=10 → PASS
   N(Placebo): TFL=14, Calc=14 → PASS
@@ -54,11 +55,12 @@ Validating: T-01 — Table 14.1.1 — Demographic and Baseline Characteristics
 Validating: T-03 — Table 14.3.1 — Summary of Adverse Events
 ======================================================================
   Parsed table: 23 rows × 4 cols
-  any_teae(Drug A 10mg): TFL=None, Calc=11(100.0%) → FAIL
-  any_sae(Drug A 10mg): TFL=None, Calc=1(9.1%) → FAIL
+  any_teae(Drug A 10mg): TFL=11 (100.0), Calc=11(100.0%) → PASS
+  any_sae(Drug A 10mg): TFL=1 (9.1), Calc=1(9.1%) → PASS
+  any_related(Drug A 10mg): TFL=11 (100.0), Calc=11(100.0%) → PASS
   ...
 
-  ── Result: FAIL (0/69 checks passed) ──
+  ── Result: PASS (69/69 checks passed) ──
 
 ======================================================================
 Validating: L-01 — Listing 16.2.7.1 — Treatment-Emergent Adverse Events
@@ -74,14 +76,14 @@ Validating: L-01 — Listing 16.2.7.1 — Treatment-Emergent Adverse Events
 VALIDATION SUMMARY
 ======================================================================
   TFLs Validated:  15
-  PASSED:          10
-  FAILED:          5
+  PASSED:          15
+  FAILED:          0
   Calculations:    77
   Comparisons:     77
   Audit entries:   154
 ```
 
-The generated Excel report contains color-coded PASS/FAIL results across multiple sheets — see [`examples/TFL_Validation_Report_EXAMPLE.xlsx`](examples/TFL_Validation_Report_EXAMPLE.xlsx) for a full sample.
+The generated Excel report has color-coded PASS/FAIL cells, per-TFL detail sheets, and a full audit trail — see [`examples/`](examples/) for a downloadable sample.
 
 ## What It Does
 
