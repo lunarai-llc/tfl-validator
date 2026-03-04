@@ -144,10 +144,10 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
 .lkpi-l { font-size:11px; color:var(--dgrey); text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
 
 /* VERSION TOGGLE */
-.ver-bar { background:var(--navy); border-top:1px solid rgba(255,255,255,.1); padding:8px 32px; display:flex; align-items:center; gap:14px; }
+.ver-bar { background:var(--navy); border-top:1px solid rgba(255,255,255,.1); padding:8px 32px; display:flex; align-items:center; gap:14px; position:relative; z-index:50; }
 .ver-label { color:rgba(255,255,255,.7); font-size:12px; font-weight:600; }
 .ver-toggle { display:flex; border:2px solid rgba(255,255,255,.3); border-radius:8px; overflow:hidden; }
-.ver-btn { padding:6px 20px; border:none; background:rgba(255,255,255,.1); font-size:12px; font-weight:700; cursor:pointer; color:#fff; transition:all .15s; font-family:Arial,sans-serif; }
+.ver-btn { padding:6px 20px; border:none; background:rgba(255,255,255,.1); font-size:12px; font-weight:700; cursor:pointer; color:#fff; transition:all .15s; font-family:Arial,sans-serif; position:relative; z-index:51; pointer-events:auto; }
 .ver-btn.on { background:var(--blue); color:#fff; }
 .ver-btn:not(.on):hover { background:rgba(255,255,255,.2); }
 .ver-desc { color:var(--lblue); font-size:11px; }
