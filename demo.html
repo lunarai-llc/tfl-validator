@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFL Validator — Interactive Demo</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--border:#334155;--accent:#3b82f6;--accent2:#8b5cf6;--green:#22c55e;--red:#ef4444;--yellow:#eab308;--text:#e2e8f0;--muted:#94a3b8;--gold:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:4px}
+.subtitle{text-align:center;color:var(--muted);font-size:0.95rem;margin-bottom:32px}
+.tabs{display:flex;justify-content:center;gap:8px;margin-bottom:32px}
+.tab{padding:12px 28px;border-radius:10px;border:2px solid var(--border);background:transparent;color:var(--text);font-size:0.95rem;font-weight:600;cursor:pointer;transition:all .2s}
+.tab:hover{border-color:var(--accent);background:rgba(59,130,246,0.1)}
+.tab.active{border-color:var(--accent);background:rgba(59,130,246,0.15);box-shadow:0 0 20px rgba(59,130,246,0.15)}
+.tab .badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700}
+.tab .badge.pro{background:linear-gradient(135deg,var(--gold),#d97706);color:#000}
+.tab .badge.free{background:var(--border);color:var(--muted)}
+.study-header{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.study-header .meta{text-align:center}
+.study-header .meta-label{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+.study-header .meta-value{font-size:1.1rem;font-weight:700;margin-top:2px}
+.stats-bar{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.stat-card{flex:1;min-width:160px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-card .num{font-size:2rem;font-weight:800}
+.stat-card .num.green{color:var(--green)}
+.stat-card .num.red{color:var(--red)}
+.stat-card .num.blue{color:var(--accent)}
+.stat-card .lbl{font-size:0.8rem;color:var(--muted);margin-top:4px}
+.progress-bar{height:8px;border-radius:4px;background:var(--border);overflow:hidden;margin-bottom:24px}
+.progress-bar .fill{height:100%;border-radius:4px;transition:width 1.5s ease-out}
+.progress-bar .fill.green{background:linear-gradient(90deg,var(--green),#4ade80)}
+.progress-bar .fill.mixed{background:linear-gradient(90deg,var(--green) 80%,var(--red) 100%)}
+.tfl-grid{display:flex;flex-direction:column;gap:8px}
+.tfl-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:grid;grid-template-columns:70px 1fr 110px 80px 50px;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
+.tfl-row:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.tfl-row.expanded{border-color:var(--accent);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.tfl-id{font-weight:700;font-size:0.9rem;color:var(--accent)}
+.tfl-title{font-size:0.88rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tfl-checks{font-size:0.8rem;color:var(--muted)}
+.tfl-checks span{font-weight:600;color:var(--text)}
+.badge-status{display:inline-block;padding:4px 12px;border-radius:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase}
+.badge-status.pass{background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3)}
+.badge-status.fail{background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+.expand-icon{color:var(--muted);font-size:1.2rem;text-align:center;transition:transform .2s}
+.tfl-row.expanded .expand-icon{transform:rotate(180deg)}
+.detail-panel{background:rgba(30,41,59,0.8);border:1px solid var(--border);border-top:none;border-bottom-left-radius:12px;border-bottom-right-radius:12px;padding:16px 20px;margin-bottom:4px}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.detail-item{display:flex;justify-content:space-between;padding:6px 12px;border-radius:6px;font-size:0.82rem;background:rgba(15,23,42,0.6)}
+.detail-item.pass{border-left:3px solid var(--green)}
+.detail-item.fail{border-left:3px solid var(--red)}
+.detail-item .label{color:var(--muted);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail-item .vals{font-weight:600;font-family:monospace;font-size:0.8rem}
+.detail-item.pass .vals{color:var(--green)}
+.detail-item.fail .vals{color:var(--red)}
+.tier-diff{text-align:center;margin:32px 0 16px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:16px}
+.tier-diff h3{margin-bottom:8px;font-size:1.1rem}
+.tier-diff p{color:var(--muted);font-size:0.9rem;line-height:1.6}
+.tier-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:0.85rem}
+.tier-table th,.tier-table td{padding:8px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.tier-table th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:0.75rem}
+.tier-table .check{color:var(--green)}
+.tier-table .cross{color:var(--muted)}
+@media(max-width:768px){.tfl-row{grid-template-columns:60px 1fr 80px 60px 30px;gap:6px;padding:12px}.study-header{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>TFL Validator</h1>
+<p class="subtitle">Independent Statistical Verification for Clinical Trial Outputs</p>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('pro')">Pro Version <span class="badge pro">PRO</span></button>
+<button class="tab" onclick="switchTab('free')">Free Version <span class="badge free">OSS</span></button>
+</div>
+
+<div id="content"></div>
+
+<div class="tier-diff">
+<h3>Free vs Pro Comparison</h3>
+<p>Both versions use the same validation engine. Pro adds real-study data, expanded domain coverage, and full audit trail.</p>
+<table class="tier-table">
+<tr><th>Feature</th><th>Free (OSS)</th><th>Pro</th></tr>
+<tr><td>Demographics validation</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+<tr><td>AE summary / SOC / PT</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+<tr><td>SAE & AE by severity</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+<tr><td>Listing validation</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+<tr><td>Lab results summary</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Vital signs summary</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Exposure / duration</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Concomitant medications</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Medical history</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Disposition analysis</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Real study data (CDISCPILOT01)</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+<tr><td>Study-agnostic config</td><td class="cross">&#8212;</td><td class="check">&#10003;</td></tr>
+</table>
+</div>
+</div>
+
+<script>
+const DATA = {"free":{"study":{"study_id":"XYZ-2025-01","study_title":"A Phase III Study of Drug A vs Placebo in Oncology","protocol":"XYZ-2025-01-PROT-v3.0","sponsor":"Acme Pharma Inc.","cro":"Lunar AI","phase":"Phase III","indication":"Oncology \u2014 NSCLC","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 (OSS)"},"results":[{"id":"T-01","title":"Table 14.1.1 \u2014 Demographic and Baseline Characteristics","type":"Table","vtype":"demographics","status":"FAIL","passed":34,"total":51,"details":[{"label":"N(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N(Placebo)","tfl":"14","calc":"14","match":true},{"label":"Mean(AGE, Drug A 10mg)","tfl":"53.3","calc":"53.3","match":true},{"label":"SD(AGE, Drug A 10mg)","tfl":"12.99","calc":"12.99","match":true},{"label":"Median(AGE, Drug A 10mg)","tfl":"49.0","calc":"49.0","match":true},{"label":"Min(AGE, Drug A 10mg)","tfl":"34","calc":"34","match":true},{"label":"Max(AGE, Drug A 10mg)","tfl":"73","calc":"73","match":true},{"label":"Mean(AGE, Drug B 20mg)","tfl":"56.7","calc":"54.4","match":false},{"label":"SD(AGE, Drug B 20mg)","tfl":"10.01","calc":"10.01","match":true},{"label":"Median(AGE, Drug B 20mg)","tfl":"55.5","calc":"55.5","match":true},{"label":"Min(AGE, Drug B 20mg)","tfl":"37","calc":"37","match":true}]},{"id":"T-02","title":"Table 14.1.2 \u2014 Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Drug A 10mg)","tfl":"11","calc":"11","match":true},{"label":"N_safety(Drug B 20mg)","tfl":"10","calc":"10","match":true},{"label":"N_safety(Placebo)","tfl":"14","calc":"14","match":true}]},{"id":"T-03","title":"Table 14.3.1 \u2014 Summary of Adverse Events","type":"Table","vtype":"safety_ae","status":"FAIL","passed":66,"total":69,"details":[{"label":"any_teae(Drug A 10mg)","tfl":"11 (100.0)","calc":"11 (100.0)","match":true},{"label":"any_teae(Drug B 20mg)","tfl":"10 (100.0)","calc":"10 (100.0)","match":true},{"label":"any_teae(Placebo)","tfl":"14 (100.0)","calc":"14 (100.0)","match":true},{"label":"any_sae(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"any_sae(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"any_sae(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true},{"label":"any_related(Drug A 10mg)","tfl":"11 (100.0)","calc":"7 (63.6)","match":false},{"label":"any_related(Drug B 20mg)","tfl":"7 (70.0)","calc":"5 (50.0)","match":false},{"label":"any_related(Placebo)","tfl":"12 (85.7)","calc":"7 (50.0)","match":false},{"label":"SOC(Gastrointestinal disorder, Drug A 10mg)","tfl":"5 (45.5)","calc":"5 (45.5)","match":true},{"label":"PT(Abdominal pain, Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"PT(Diarrhoea, Drug A 10mg)","tfl":"2 (18.2)","calc":"2 (18.2)","match":true}]},{"id":"T-04","title":"Table 14.3.2 \u2014 Adverse Events by Grade","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Drug A 10mg)","tfl":"10 (90.9)","calc":"10 (90.9)","match":true},{"label":"Grade 1-2(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 1-2(Placebo)","tfl":"13 (92.9)","calc":"13 (92.9)","match":true},{"label":"Grade 3(Drug A 10mg)","tfl":"7 (63.6)","calc":"7 (63.6)","match":true},{"label":"Grade 3(Drug B 20mg)","tfl":"7 (70.0)","calc":"7 (70.0)","match":true},{"label":"Grade 3(Placebo)","tfl":"6 (42.9)","calc":"6 (42.9)","match":true},{"label":"Grade 4(Drug A 10mg)","tfl":"2 (18.2)","calc":"2 (18.2)","match":true},{"label":"Grade 4(Drug B 20mg)","tfl":"2 (20.0)","calc":"2 (20.0)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (35.7)","calc":"5 (35.7)","match":true}]},{"id":"T-05","title":"Table 14.3.3 \u2014 Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":15,"total":15,"details":[{"label":"Any SAE(Drug A 10mg)","tfl":"1 (9.1)","calc":"1 (9.1)","match":true},{"label":"Any SAE(Drug B 20mg)","tfl":"4 (40.0)","calc":"4 (40.0)","match":true},{"label":"Any SAE(Placebo)","tfl":"3 (21.4)","calc":"3 (21.4)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(Gastrointestinal dis,Placebo)","tfl":"1 (7.1)","calc":"1 (7.1)","match":true},{"label":"SAE_SOC(General disorders,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(General disorders,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(General disorders,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Drug A 10mg)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Drug B 20mg)","tfl":"1 (10.0)","calc":"1 (10.0)","match":true},{"label":"SAE_SOC(Musculoskeletal diso,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true}]},{"id":"L-01","title":"Listing 16.2.7.1 \u2014 Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"96","calc":"96","match":true}]},{"id":"L-02","title":"Listing 16.2.7.2 \u2014 Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"8","calc":"8","match":true}]},{"id":"L-03","title":"Listing 16.2.7.3 \u2014 Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"4","calc":"4","match":true}]},{"id":"L-04","title":"Listing 16.2.7.4 \u2014 Individual Subject Responses","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"40","calc":"40","match":true}]},{"id":"L-05","title":"Listing 16.2.7.5 \u2014 Protocol Deviations","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"6","calc":"6","match":true}]}]},"pro":{"study":{"study_id":"CDISCPILOT01","study_title":"Safety and Efficacy of Xanomeline in Patients with Mild to Moderate Alzheimer's Disease","protocol":"CDISCPILOT01-PROT","sponsor":"CDISC","cro":"Lunar AI","phase":"Phase III","indication":"CNS \u2014 Alzheimer's Disease","analysis":"Primary Efficacy Analysis","generated_by":"TFL Validator v1.0 (OSS)"},"results":[{"id":"T-01","title":"Table 14.1.1 \u2014 Summary of Demographics and Baseline Characteristics","type":"Table","vtype":"demographics","status":"PASS","passed":39,"total":39,"details":[{"label":"N(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true},{"label":"Mean(AGE, Placebo)","tfl":"75.2","calc":"75.2","match":true},{"label":"SD(AGE, Placebo)","tfl":"8.59","calc":"8.59","match":true},{"label":"Median(AGE, Placebo)","tfl":"76.0","calc":"76.0","match":true},{"label":"Min(AGE, Placebo)","tfl":"52","calc":"52","match":true},{"label":"Max(AGE, Placebo)","tfl":"89","calc":"89","match":true},{"label":"Mean(AGE, Xanomeline High Dose)","tfl":"73.8","calc":"73.8","match":true},{"label":"SD(AGE, Xanomeline High Dose)","tfl":"7.94","calc":"7.94","match":true},{"label":"Median(AGE, Xanomeline High Dose)","tfl":"75.5","calc":"75.5","match":true},{"label":"Min(AGE, Xanomeline High Dose)","tfl":"56","calc":"56","match":true}]},{"id":"T-02","title":"Table 14.1.2 \u2014 Summary of Subject Disposition","type":"Table","vtype":"disposition","status":"PASS","passed":3,"total":3,"details":[{"label":"N_safety(Placebo)","tfl":"86","calc":"86","match":true},{"label":"N_safety(Xanomeline High Dose)","tfl":"72","calc":"72","match":true},{"label":"N_safety(Xanomeline Low Dose)","tfl":"96","calc":"96","match":true}]},{"id":"T-03","title":"Table 14.3.1 \u2014 Overall Summary of Treatment-Emergent Adverse Events","type":"Table","vtype":"safety_ae","status":"PASS","passed":9,"total":9,"details":[{"label":"any_teae(Placebo)","tfl":"65 (75.6)","calc":"65 (75.6)","match":true},{"label":"any_teae(Xanomeline High Dose)","tfl":"68 (94.4)","calc":"68 (94.4)","match":true},{"label":"any_teae(Xanomeline Low Dose)","tfl":"84 (87.5)","calc":"84 (87.5)","match":true},{"label":"any_sae(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"any_sae(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"any_sae(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"any_related(Placebo)","tfl":"43 (50.0)","calc":"43 (50.0)","match":true},{"label":"any_related(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"any_related(Xanomeline Low Dose)","tfl":"77 (80.2)","calc":"77 (80.2)","match":true}]},{"id":"T-05","title":"Table 14.3.3 \u2014 Summary of Serious Adverse Events","type":"Table","vtype":"safety_sae","status":"PASS","passed":6,"total":6,"details":[{"label":"Any SAE(Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"Any SAE(Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"Any SAE(Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline High Dose)","tfl":"1 (1.4)","calc":"1 (1.4)","match":true},{"label":"SAE_SOC(NERVOUS SYSTEM DISOR,Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true}]},{"id":"T-06","title":"Table 14.3.4 \u2014 TEAEs by Maximum Severity","type":"Table","vtype":"safety_ae_grade","status":"PASS","passed":9,"total":9,"details":[{"label":"Grade 1-2(Placebo)","tfl":"58 (67.4)","calc":"58 (67.4)","match":true},{"label":"Grade 1-2(Xanomeline High Dose)","tfl":"64 (88.9)","calc":"64 (88.9)","match":true},{"label":"Grade 1-2(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"Grade 3(Placebo)","tfl":"25 (29.1)","calc":"25 (29.1)","match":true},{"label":"Grade 3(Xanomeline High Dose)","tfl":"46 (63.9)","calc":"46 (63.9)","match":true},{"label":"Grade 3(Xanomeline Low Dose)","tfl":"58 (60.4)","calc":"58 (60.4)","match":true},{"label":"Grade 4(Placebo)","tfl":"5 (5.8)","calc":"5 (5.8)","match":true},{"label":"Grade 4(Xanomeline High Dose)","tfl":"8 (11.1)","calc":"8 (11.1)","match":true},{"label":"Grade 4(Xanomeline Low Dose)","tfl":"16 (16.7)","calc":"16 (16.7)","match":true}]},{"id":"L-01","title":"Listing 16.2.7.1 \u2014 Treatment-Emergent Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1122","calc":"1122","match":true}]},{"id":"L-02","title":"Listing 16.2.7.2 \u2014 Serious Adverse Events","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},{"id":"L-03","title":"Listing 16.2.7.3 \u2014 Deaths","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"3","calc":"3","match":true}]},{"id":"L-04","title":"Listing 16.2.8.1 \u2014 Concomitant Medications","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"7510","calc":"7510","match":true}]},{"id":"L-05","title":"Listing 16.2.5.1 \u2014 Medical History","type":"Listing","vtype":"listing","status":"PASS","passed":1,"total":1,"details":[{"label":"Row count","tfl":"1818","calc":"1818","match":true}]},{"id":"T-07","title":"Table 14.2.1 \u2014 Summary of Exposure to Study Treatment","type":"Table","vtype":"exposure","status":"PASS","passed":21,"total":21,"details":[{"label":"Duration_mean(Placebo)","tfl":"149.5","calc":"149.5","match":true},{"label":"Duration_median(Placebo)","tfl":"182.0","calc":"182.0","match":true},{"label":"Duration_min(Placebo)","tfl":"7","calc":"7","match":true},{"label":"Duration_max(Placebo)","tfl":"210","calc":"210","match":true},{"label":"Duration_mean(Xanomeline High Dose)","tfl":"112.2","calc":"112.2","match":true},{"label":"Duration_median(Xanomeline High Dose)","tfl":"96.5","calc":"96.5","match":true},{"label":"Duration_min(Xanomeline High Dose)","tfl":"15","calc":"15","match":true},{"label":"Duration_max(Xanomeline High Dose)","tfl":"200","calc":"200","match":true},{"label":"Duration_mean(Xanomeline Low Dose)","tfl":"86.8","calc":"86.8","match":true},{"label":"Duration_median(Xanomeline Low Dose)","tfl":"63.0","calc":"63.0","match":true},{"label":"Duration_min(Xanomeline Low Dose)","tfl":"1","calc":"1","match":true},{"label":"Duration_max(Xanomeline Low Dose)","tfl":"212","calc":"212","match":true}]},{"id":"T-08","title":"Table 14.4.1 \u2014 Summary of Selected Laboratory Results","type":"Table","vtype":"lab_summary","status":"PASS","passed":60,"total":60,"details":[{"label":"ALT_baseline_mean(Placebo)","tfl":"17.1","calc":"17.1","match":true},{"label":"ALT_baseline_sd(Placebo)","tfl":"7.52","calc":"7.52","match":true},{"label":"ALT_baseline_mean(Xanomeline High Dose)","tfl":"18.7","calc":"18.7","match":true},{"label":"ALT_baseline_sd(Xanomeline High Dose)","tfl":"9.04","calc":"9.04","match":true},{"label":"ALT_baseline_mean(Xanomeline Low Dose)","tfl":"17.7","calc":"17.7","match":true},{"label":"ALT_baseline_sd(Xanomeline Low Dose)","tfl":"7.94","calc":"7.94","match":true},{"label":"ALT_postbaseline_mean(Placebo)","tfl":"15.8","calc":"15.8","match":true},{"label":"ALT_postbaseline_sd(Placebo)","tfl":"6.03","calc":"6.03","match":true},{"label":"ALT_postbaseline_mean(Xanomeline High Dose)","tfl":"18.3","calc":"18.3","match":true},{"label":"ALT_postbaseline_sd(Xanomeline High Dose)","tfl":"6.01","calc":"6.01","match":true},{"label":"ALT_postbaseline_mean(Xanomeline Low Dose)","tfl":"16.3","calc":"16.3","match":true},{"label":"ALT_postbaseline_sd(Xanomeline Low Dose)","tfl":"6.36","calc":"6.36","match":true}]},{"id":"T-09","title":"Table 14.4.2 \u2014 Summary of Vital Signs","type":"Table","vtype":"vitals_summary","status":"PASS","passed":18,"total":18,"details":[{"label":"SYSBP_baseline_mean(Placebo)","tfl":"136.8","calc":"136.8","match":true},{"label":"SYSBP_baseline_mean(Xanomeline High Dose)","tfl":"137.8","calc":"137.8","match":true},{"label":"SYSBP_baseline_mean(Xanomeline Low Dose)","tfl":"137.9","calc":"137.9","match":true},{"label":"SYSBP_end_of_treatment_mean(Placebo)","tfl":"132.7","calc":"132.7","match":true},{"label":"SYSBP_end_of_treatment_mean(Xanomeline High Dose)","tfl":"132.3","calc":"132.3","match":true},{"label":"SYSBP_end_of_treatment_mean(Xanomeline Low Dose)","tfl":"133.0","calc":"133.0","match":true},{"label":"DIABP_baseline_mean(Placebo)","tfl":"77.1","calc":"77.1","match":true},{"label":"DIABP_baseline_mean(Xanomeline High Dose)","tfl":"78.2","calc":"78.2","match":true},{"label":"DIABP_baseline_mean(Xanomeline Low Dose)","tfl":"76.6","calc":"76.6","match":true},{"label":"DIABP_end_of_treatment_mean(Placebo)","tfl":"74.4","calc":"74.4","match":true},{"label":"DIABP_end_of_treatment_mean(Xanomeline High Dose)","tfl":"76.0","calc":"76.0","match":true},{"label":"DIABP_end_of_treatment_mean(Xanomeline Low Dose)","tfl":"76.0","calc":"76.0","match":true}]},{"id":"T-10","title":"Table 14.5.1 \u2014 Summary of Concomitant Medications by ATC Class","type":"Table","vtype":"conmeds","status":"PASS","passed":24,"total":24,"details":[{"label":"AnyConMed(Placebo)","tfl":"50 (58.1)","calc":"50 (58.1)","match":true},{"label":"AnyConMed(Xanomeline High Dose)","tfl":"51 (70.8)","calc":"51 (70.8)","match":true},{"label":"AnyConMed(Xanomeline Low Dose)","tfl":"64 (66.7)","calc":"64 (66.7)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Placebo)","tfl":"2 (2.3)","calc":"2 (2.3)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"CM_class(ALIMENTARY TRACT AND,Xanomeline Low Dose)","tfl":"2 (2.1)","calc":"2 (2.1)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Placebo)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Xanomeline High Dose)","tfl":"0 (0.0)","calc":"0 (0.0)","match":true},{"label":"CM_class(ANTINEOPLASTIC AND I,Xanomeline Low Dose)","tfl":"1 (1.0)","calc":"1 (1.0)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Placebo)","tfl":"3 (3.5)","calc":"3 (3.5)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Xanomeline High Dose)","tfl":"3 (4.2)","calc":"3 (4.2)","match":true},{"label":"CM_class(CARDIOVASCULAR SYSTE,Xanomeline Low Dose)","tfl":"3 (3.1)","calc":"3 (3.1)","match":true}]},{"id":"T-11","title":"Table 14.5.2 \u2014 Summary of Medical History by Body System","type":"Table","vtype":"medhist","status":"PASS","passed":81,"total":81,"details":[{"label":"AnyMH(Placebo)","tfl":"86 (100.0)","calc":"86 (100.0)","match":true},{"label":"AnyMH(Xanomeline High Dose)","tfl":"72 (100.0)","calc":"72 (100.0)","match":true},{"label":"AnyMH(Xanomeline Low Dose)","tfl":"96 (100.0)","calc":"96 (100.0)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Placebo)","tfl":"2 (2.3)","calc":"2 (2.3)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"MH_SOC(BLOOD AND LYMPHATIC ,Xanomeline Low Dose)","tfl":"3 (3.1)","calc":"3 (3.1)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Placebo)","tfl":"17 (19.8)","calc":"17 (19.8)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Xanomeline High Dose)","tfl":"15 (20.8)","calc":"15 (20.8)","match":true},{"label":"MH_SOC(CARDIAC DISORDERS,Xanomeline Low Dose)","tfl":"25 (26.0)","calc":"25 (26.0)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Placebo)","tfl":"3 (3.5)","calc":"3 (3.5)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Xanomeline High Dose)","tfl":"2 (2.8)","calc":"2 (2.8)","match":true},{"label":"MH_SOC(CONGENITAL, FAMILIAL,Xanomeline Low Dose)","tfl":"1 (1.0)","calc":"1 (1.0)","match":true}]}]}};
+
+let currentTab = 'pro';
+let expandedTfl = null;
+
+function switchTab(tab) {
+  currentTab = tab;
+  expandedTfl = null;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.closest('.tab').classList.add('active');
+  render();
+}
+
+function toggleTfl(id) {
+  expandedTfl = expandedTfl === id ? null : id;
+  render();
+}
+
+function render() {
+  const d = DATA[currentTab];
+  const study = d.study;
+  const results = d.results;
+  const totalChecks = results.reduce((a, r) => a + r.total, 0);
+  const totalPass = results.reduce((a, r) => a + r.passed, 0);
+  const tflPass = results.filter(r => r.status === 'PASS').length;
+  const tflFail = results.length - tflPass;
+  const pct = totalChecks > 0 ? (totalPass / totalChecks * 100).toFixed(1) : 0;
+
+  const isPro = currentTab === 'pro';
+  const tierLabel = isPro ? 'Pro Version' : 'Free Version (OSS)';
+
+  let html = `
+    <div class="study-header">
+      <div class="meta"><div class="meta-label">Study</div><div class="meta-value">${study.study_id}</div></div>
+      <div class="meta"><div class="meta-label">Indication</div><div class="meta-value">${study.indication || study.phase || ''}</div></div>
+      <div class="meta"><div class="meta-label">Version</div><div class="meta-value">${tierLabel}</div></div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-card"><div class="num blue">${results.length}</div><div class="lbl">TFLs Validated</div></div>
+      <div class="stat-card"><div class="num green">${tflPass}</div><div class="lbl">Passed</div></div>
+      <div class="stat-card"><div class="num ${tflFail > 0 ? 'red' : 'green'}">${tflFail}</div><div class="lbl">Failed</div></div>
+      <div class="stat-card"><div class="num blue">${totalChecks}</div><div class="lbl">Statistical Checks</div></div>
+      <div class="stat-card"><div class="num ${parseFloat(pct) >= 95 ? 'green' : 'red'}">${pct}%</div><div class="lbl">Match Rate</div></div>
+    </div>
+    <div class="progress-bar"><div class="fill ${tflFail > 0 ? 'mixed' : 'green'}" style="width:${pct}%"></div></div>
+    <div class="tfl-grid">`;
+
+  results.forEach(r => {
+    const isExp = expandedTfl === r.id;
+    html += `
+      <div class="tfl-row ${isExp ? 'expanded' : ''}" onclick="toggleTfl('${r.id}')">
+        <div class="tfl-id">${r.id}</div>
+        <div class="tfl-title" title="${r.title}">${r.title}</div>
+        <div class="tfl-checks"><span>${r.passed}/${r.total}</span> checks</div>
+        <div><span class="badge-status ${r.status.toLowerCase()}">${r.status}</span></div>
+        <div class="expand-icon">&#9662;</div>
+      </div>`;
+    if (isExp && r.details && r.details.length > 0) {
+      html += `<div class="detail-panel"><div class="detail-grid">`;
+      r.details.forEach(d => {
+        const cls = d.match ? 'pass' : 'fail';
+        const icon = d.match ? '&#10003;' : '&#10007;';
+        html += `<div class="detail-item ${cls}">
+          <span class="label" title="${d.label}">${d.label}</span>
+          <span class="vals">${icon} TFL=${d.tfl || 'None'} | Calc=${d.calc || 'None'}</span>
+        </div>`;
+      });
+      html += `</div></div>`;
+    }
+  });
+  html += '</div>';
+  document.getElementById('content').innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>

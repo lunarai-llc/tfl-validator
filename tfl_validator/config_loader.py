@@ -205,7 +205,15 @@ def _load_column_mappings(xls):
     """
     if "Column Mapping" not in xls.sheet_names:
         return {}
-    df = pd.read_excel(xls, sheet_name="Column Mapping", header=0)
+    # Find the real header row (containing "TFL ID")
+    df_raw = pd.read_excel(xls, sheet_name="Column Mapping", header=None)
+    header_row = 0
+    for i, row in df_raw.iterrows():
+        vals = [str(v).strip() for v in row.values if pd.notna(v)]
+        if "TFL ID" in vals:
+            header_row = i
+            break
+    df = pd.read_excel(xls, sheet_name="Column Mapping", header=header_row)
     df.columns = [str(c).strip() for c in df.columns]
     result = {}
     for _, row in df.iterrows():
@@ -231,7 +239,15 @@ def _load_variable_mappings(xls):
     """
     if "Variable Mapping" not in xls.sheet_names:
         return {}
-    df = pd.read_excel(xls, sheet_name="Variable Mapping", header=0)
+    # Try to find the real header row (containing "TFL ID")
+    df_raw = pd.read_excel(xls, sheet_name="Variable Mapping", header=None)
+    header_row = 0
+    for i, row in df_raw.iterrows():
+        vals = [str(v).strip() for v in row.values if pd.notna(v)]
+        if "TFL ID" in vals:
+            header_row = i
+            break
+    df = pd.read_excel(xls, sheet_name="Variable Mapping", header=header_row)
     df.columns = [str(c).strip() for c in df.columns]
     result = {}
     for _, row in df.iterrows():
@@ -260,7 +276,15 @@ def _load_rounding_rules(xls):
     """
     if "Rounding Rules" not in xls.sheet_names:
         return {}
-    df = pd.read_excel(xls, sheet_name="Rounding Rules", header=0)
+    # Find the real header row (containing "TFL ID")
+    df_raw = pd.read_excel(xls, sheet_name="Rounding Rules", header=None)
+    header_row = 0
+    for i, row in df_raw.iterrows():
+        vals = [str(v).strip() for v in row.values if pd.notna(v)]
+        if "TFL ID" in vals:
+            header_row = i
+            break
+    df = pd.read_excel(xls, sheet_name="Rounding Rules", header=header_row)
     df.columns = [str(c).strip() for c in df.columns]
     result = {}
     for _, row in df.iterrows():

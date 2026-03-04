@@ -132,7 +132,10 @@ def build_treatment_column_map_with_treatments(tables, tfl_cfg, treatments):
     result = {}
     for trt in treatments:
         for ci, col in enumerate(tfl_cols):
-            if trt in str(col):
+            # Normalize whitespace (newlines, tabs) to spaces for matching
+            col_normalized = " ".join(str(col).split())
+            trt_normalized = " ".join(str(trt).split())
+            if trt_normalized in col_normalized:
                 result[trt] = ci
                 break
     return result
@@ -216,7 +219,11 @@ def get_adam_flags(tfl_cfg):
         if purpose:
             result[purpose]["var"] = var_name
             if value:
-                result[purpose]["value"] = value
+                # Support comma-separated values (e.g., "PROBABLE,POSSIBLE")
+                if "," in str(value):
+                    result[purpose]["value"] = [v.strip() for v in str(value).split(",")]
+                else:
+                    result[purpose]["value"] = value
         else:
             # Unknown variable — store by variable name as purpose
             result[var_name] = {"var": var_name, "value": value if value else None}
@@ -331,21 +338,35 @@ def find_tfl_value(tables, stat_label, row_context, col_idx, section_context=Non
             first_col = row_vals[0].lower() if row_vals else ""
 
             if section_context and first_col and first_col not in ("", " "):
-                in_section = section_context.lower() in first_col
+                sc = section_context.lower()
+                # Try exact substring match first, then try first-word match
+                in_section = (sc in first_col or
+                              first_col.split()[0].rstrip(",") in sc.split()[0] or
+                              sc.split()[0] in first_col.split()[0].rstrip(","))
 
             if not in_section:
                 continue
 
             if len(row_vals) > 1:
-                # Primary: two-column-label tables (demographics) — exact match on col 1
+                # Primary: two-column-label tables (demographics) — match on col 1
                 stat_col = row_vals[1].lower().strip()
-                if row_context.lower() == stat_col:
+                rc_lower = row_context.lower()
+                # Exact match first, then startswith
+                if rc_lower == stat_col or stat_col.startswith(rc_lower + " ") or stat_col.startswith(rc_lower + ","):
                     if col_idx < len(row_vals):
                         return row_vals[col_idx]
 
-                # Fallback: single-column-label tables (AE summary, SOC/PT) — substring in col 0
-                if row_context.lower() in row_vals[0].lower():
-                    if col_idx < len(row_vals):
-                        return row_vals[col_idx]
+                # Fallback: single-column-label tables (AE summary, SOC/PT)
+                # Use word-boundary-aware matching to avoid "male" matching "female"
+                col0_lower = row_vals[0].lower()
+                if rc_lower in col0_lower:
+                    # Verify it's a word boundary match (not a substring of another word)
+                    idx = col0_lower.find(rc_lower)
+                    before_ok = (idx == 0 or not col0_lower[idx-1].isalpha())
+                    after_idx = idx + len(rc_lower)
+                    after_ok = (after_idx >= len(col0_lower) or not col0_lower[after_idx].isalpha())
+                    if before_ok and after_ok:
+                        if col_idx < len(row_vals):
+                            return row_vals[col_idx]
 
     return None

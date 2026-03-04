@@ -18,6 +18,11 @@ from .validators import (
     validate_listing,
     validate_placeholder,
 )
+from .validators.lab import validate_lab_summary
+from .validators.vitals import validate_vitals_summary
+from .validators.exposure import validate_exposure
+from .validators.conmeds import validate_conmeds
+from .validators.medhist import validate_medhist
 
 
 def run_validation(config_path, output_path=None):
@@ -95,6 +100,16 @@ def run_validation(config_path, output_path=None):
                 vr = validate_survival_pfs(tfl_cfg, audit)
             elif vtype == "listing":
                 vr = validate_listing(tfl_cfg, audit)
+            elif vtype == "lab_summary":
+                vr = validate_lab_summary(tfl_cfg, audit, specs=specs, tolerances=tolerances)
+            elif vtype == "vitals_summary":
+                vr = validate_vitals_summary(tfl_cfg, audit, specs=specs, tolerances=tolerances)
+            elif vtype == "exposure":
+                vr = validate_exposure(tfl_cfg, audit, specs=specs, tolerances=tolerances)
+            elif vtype == "conmeds":
+                vr = validate_conmeds(tfl_cfg, audit, specs=specs, tolerances=tolerances)
+            elif vtype == "medhist":
+                vr = validate_medhist(tfl_cfg, audit, specs=specs, tolerances=tolerances)
             elif vtype in ("lab_placeholder", "vitals_placeholder", "exposure_placeholder", "efficacy_placeholder"):
                 vr = validate_placeholder(tfl_cfg, audit)
             else:

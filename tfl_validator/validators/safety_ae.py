@@ -101,10 +101,20 @@ def validate_safety_ae(tfl_cfg, audit, specs=None, tolerances=None):
                 print(f"  {ae_cat}({trt}): TFL={tfl_val}, Calc={calc_data['n']}({calc_data['pct']}%) → {status}")
 
     # ── AE by SOC/PT ──
+    # Skip SOC/PT checks if the table is a summary-only table (few rows, no SOC entries)
+    # A summary table typically has < 10 rows; a SOC/PT table has many more
+    skip_soc_pt = tbl.shape[0] < 10
+    if skip_soc_pt:
+        print(f"  (Skipping SOC/PT checks — table has {tbl.shape[0]} rows, appears to be summary-only)")
+
     soc_var = flags["soc_var"]["var"]
     pt_var = flags["pt_var"]["var"]
-    calc_soc_pt = compute_ae_by_soc_pt(adae_te, safe_pop, group_var, audit, tfl_id, pop_filter,
-                                        soc_var=soc_var, pt_var=pt_var)
+
+    if not skip_soc_pt:
+        calc_soc_pt = compute_ae_by_soc_pt(adae_te, safe_pop, group_var, audit, tfl_id, pop_filter,
+                                            soc_var=soc_var, pt_var=pt_var)
+    else:
+        calc_soc_pt = {}
 
     for soc, soc_data in calc_soc_pt.items():
         for trt in treatments:

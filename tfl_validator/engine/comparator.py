@@ -107,6 +107,13 @@ def compare_npct(tfl_val, calc_n, calc_pct, n_tol=0, pct_tol=0.15):
     return match, note
 
 
+def compare_mean_sd(tfl_val, calc_val, tolerance=0.15):
+    """Compare a single mean or SD value from TFL against calculated value.
+    Alias for compare_values with a default tolerance suitable for means/SDs.
+    """
+    return compare_values(tfl_val, calc_val, tolerance=tolerance)
+
+
 class ValidationResult:
     """Collects comparison results for a single TFL."""
     def __init__(self, tfl_id, tfl_title):

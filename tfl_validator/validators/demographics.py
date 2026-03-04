@@ -65,8 +65,11 @@ def validate_demographics(tfl_cfg, audit, specs=None, tolerances=None):
             continue
         tfl_val = find_tfl_value(tables, "N", "N", col_idx)
         for col_header in tfl_cols:
-            if trt in str(col_header):
-                m = re.search(r'N=(\d+)', str(col_header))
+            # Normalize whitespace for matching (headers may contain newlines)
+            col_norm = " ".join(str(col_header).split())
+            trt_norm = " ".join(str(trt).split())
+            if trt_norm in col_norm:
+                m = re.search(r'N=(\d+)', col_norm)
                 if m:
                     tfl_val = m.group(1)
         calc_val = calc_n.get(trt, 0)
@@ -101,6 +104,10 @@ def validate_demographics(tfl_cfg, audit, specs=None, tolerances=None):
             if col_idx is None:
                 continue
 
+            # Try to find combined "Mean (SD)" row first
+            mean_sd_val = find_tfl_value(tables, "Mean", "Mean", col_idx, section_context=section_ctx)
+            min_max_val = find_tfl_value(tables, "Min", "Min", col_idx, section_context=section_ctx)
+
             for stat_name, calc_dict, tol_key, row_ctx in [
                 ("Mean", calc_mean, "mean", "Mean"),
                 ("SD", calc_sd, "sd", "SD"),
@@ -109,6 +116,26 @@ def validate_demographics(tfl_cfg, audit, specs=None, tolerances=None):
                 ("Max", calc_max, "min_max", "Max"),
             ]:
                 tfl_val = find_tfl_value(tables, stat_name, row_ctx, col_idx, section_context=section_ctx)
+
+                # Parse combined "Mean (SD)" format: "75.2 (8.59)"
+                if stat_name == "Mean" and tfl_val and "(" in str(tfl_val):
+                    m_match = re.match(r'([\d.]+)\s*\(', str(tfl_val))
+                    if m_match:
+                        tfl_val = m_match.group(1)
+                elif stat_name == "SD" and tfl_val is None and mean_sd_val and "(" in str(mean_sd_val):
+                    m_match = re.match(r'[\d.]+\s*\(([\d.]+)\)', str(mean_sd_val))
+                    if m_match:
+                        tfl_val = m_match.group(1)
+
+                # Parse combined "Min, Max" format: "52, 89"
+                if stat_name == "Min" and tfl_val and "," in str(tfl_val):
+                    parts = str(tfl_val).split(",")
+                    tfl_val = parts[0].strip()
+                elif stat_name == "Max" and tfl_val is None and min_max_val and "," in str(min_max_val):
+                    parts = str(min_max_val).split(",")
+                    if len(parts) >= 2:
+                        tfl_val = parts[1].strip()
+
                 calc_val = calc_dict.get(trt)
                 match, note = compare_values(tfl_val, calc_val, tolerance=tolerances[tol_key])
                 vr.add(f"{stat_name}({var}, {trt})", tfl_val, calc_val, match, note,
@@ -132,13 +159,37 @@ def validate_demographics(tfl_cfg, audit, specs=None, tolerances=None):
                           f"Derivation: {deriv}",
                           variable=var, dataset=ds_name)
 
+        # Map ADaM variable names to typical TFL section labels
+        var_label_map = {
+            "agegr1": "age group", "agegr2": "age group", "agegr3": "age group",
+            "sex": "sex", "race": "race", "racegr1": "race",
+            "ethnic": "ethnic", "country": "country", "region1": "region",
+            "bmibl": "bmi", "bmiblgr1": "bmi", "weightbl": "weight",
+            "heightbl": "height", "ecogbsl": "ecog",
+        }
+        cat_section = var_label_map.get(var.lower(), var.lower())
+
+        # Common ADaM code → TFL label expansions
+        cat_label_expand = {
+            "F": "Female", "M": "Male",
+            "Y": "Yes", "N": "No",
+            "WHITE": "White", "BLACK OR AFRICAN AMERICAN": "Black Or African American",
+            "AMERICAN INDIAN OR ALASKA NATIVE": "American Indian Or Alaska Native",
+            "ASIAN": "Asian", "HISPANIC OR LATINO": "Hispanic Or Latino",
+            "NOT HISPANIC OR LATINO": "Not Hispanic Or Latino",
+        }
+
         calc_freq = compute_freq(df, var, group_var, audit, tfl_id, pop_filter)
         for cat, trt_data in calc_freq.items():
             for trt in treatments:
                 col_idx = trt_col_map.get(trt)
                 if col_idx is None:
                     continue
-                tfl_val = find_tfl_value(tables, var, str(cat), col_idx, section_context=var.lower())
+                # Try the raw category first, then expanded label
+                cat_str = str(cat)
+                tfl_val = find_tfl_value(tables, var, cat_str, col_idx, section_context=cat_section)
+                if tfl_val is None and cat_str in cat_label_expand:
+                    tfl_val = find_tfl_value(tables, var, cat_label_expand[cat_str], col_idx, section_context=cat_section)
                 if trt in trt_data:
                     calc_n_val = trt_data[trt]["n"]
                     calc_pct = trt_data[trt]["pct"]
