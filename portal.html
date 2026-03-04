@@ -144,8 +144,7 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
 .lkpi-l { font-size:11px; color:var(--dgrey); text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
 
 /* VERSION TOGGLE */
-.ver-spacer { flex:1; }
-.ver-toggle { display:flex; border:2px solid rgba(255,255,255,.3); border-radius:8px; overflow:hidden; margin-right:12px; }
+.ver-toggle { display:flex; border:2px solid rgba(255,255,255,.3); border-radius:8px; overflow:hidden; }
 .ver-btn { padding:6px 20px; border:none; background:rgba(255,255,255,.1); font-size:12px; font-weight:700; cursor:pointer; color:#fff; transition:all .15s; font-family:Arial,sans-serif; }
 .ver-btn.on { background:var(--blue); color:#fff; }
 .ver-btn:not(.on):hover { background:rgba(255,255,255,.2); }
@@ -199,8 +198,12 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
     </div>
   </div>
   <div class="hdr-meta">
+    <div class="ver-toggle">
+      <button class="ver-btn on" id="btnFree">Free (OSS)</button>
+      <button class="ver-btn" id="btnPro">Pro</button>
+    </div>
+    <span class="ver-desc" id="verDesc">XYZ-2025-01 — Synthetic demo — 10 TFLs</span>
     <div class="badge">Study: XYZ-2025-01</div>
-    <div class="hdr-date">04-Mar-2026 01:37</div>
     <div class="conf">CONFIDENTIAL</div>
   </div>
 </header>
@@ -214,12 +217,6 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
   <button class="tab" onclick="go('audit',this)">📜 Audit Trail <span class="cnt">141</span></button>
   <button class="tab" onclick="go('specs',this)">📘 ADaM Specs <span class="cnt">49</span></button>
   <button class="tab" onclick="go('compare',this)">⚖️ Free vs Pro</button>
-  <div class="ver-spacer"></div>
-  <div class="ver-toggle">
-    <button class="ver-btn on" onclick="switchVer('free',this)">Free (OSS)</button>
-    <button class="ver-btn" onclick="switchVer('pro',this)">Pro</button>
-  </div>
-  <span class="ver-desc" id="verDesc">XYZ-2025-01 — Synthetic demo — 10 TFLs</span>
 </nav>
 <main>
 
@@ -805,10 +802,10 @@ function expA(){
 
 // VERSION SWITCHER
 let currentVer = 'free';
-function switchVer(ver, btn) {
+function switchVer(ver) {
   currentVer = ver;
-  document.querySelectorAll('.ver-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
+  document.getElementById('btnFree').classList.toggle('on', ver === 'free');
+  document.getElementById('btnPro').classList.toggle('on', ver === 'pro');
 
   if (ver === 'pro') {
     TFLs = PRO_TFLs;
@@ -911,5 +908,9 @@ function renderAll() {
   document.getElementById('ft-free-checks').textContent = totalChecks;
   document.getElementById('ft-free-rate').textContent = rateExact + '%';
 })();
+
+// Version toggle — using addEventListener for reliable click handling
+document.getElementById('btnFree').addEventListener('click', function() { switchVer('free'); });
+document.getElementById('btnPro').addEventListener('click', function() { switchVer('pro'); });
 </script>
 </body></html>
