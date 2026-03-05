@@ -519,6 +519,21 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
 <!-- CATALOG TAB -->
 <div class="pane" id="p-catalog">
   <div style="padding:20px 24px 0">
+
+    <!-- Free vs Pro banner -->
+    <div style="display:flex;gap:0;margin-bottom:18px;border-radius:10px;overflow:hidden;border:2px solid #e0e0e0">
+      <div style="flex:1;background:#f7f9ff;padding:16px 20px;border-right:2px solid #e0e0e0">
+        <div style="font-size:12px;font-weight:800;color:var(--dgrey);letter-spacing:.5px;margin-bottom:6px">FREE (OSS) — THIS VERSION</div>
+        <div style="font-size:13px;color:var(--navy);font-weight:600">📋 Catalog Directory</div>
+        <div style="font-size:11px;color:var(--dgrey);margin-top:4px">Browse all 141 industry-standard TFL templates. See what datasets and R packages each one requires. Reference only — no execution.</div>
+      </div>
+      <div style="flex:1;background:linear-gradient(135deg,#1F3864,#2E75B6);padding:16px 20px;color:#fff">
+        <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:.5px;margin-bottom:6px">🔒 PRO — UPGRADE TO UNLOCK</div>
+        <div style="font-size:13px;font-weight:700">⚡ Automated Double Programming</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">Upload your ADaM data → runs each R code block → compares output against your actual TFL files. Catches errors before FDA sees them.</div>
+      </div>
+    </div>
+
     <h2 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:4px">
       📚 TLG Catalog
       <span style="font-size:12px;font-weight:400;color:var(--dgrey);margin-left:8px">
@@ -737,11 +752,23 @@ td { padding:12px 14px; font-size:13px; vertical-align:middle; }
     </table>
   </div>
   <div style="padding:0 24px 20px">
-    <div style="background:#E8F0FE;border-radius:8px;padding:14px 18px;font-size:11px;color:#1F4E79">
-      <strong>Pro Feature:</strong> Upload your ADaM datasets → run this catalog's R code automatically →
-      compare output against your actual TFL files. Catches arithmetic errors, format mismatches,
-      and population inconsistencies before FDA submission.
-      R packages: <code>tern</code>, <code>rtables</code>, <code>rlistings</code> (NEST / pharmaverse)
+    <div style="background:linear-gradient(135deg,#1F3864 0%,#2E75B6 100%);border-radius:8px;padding:16px 20px;color:#fff;display:flex;align-items:center;gap:20px">
+      <div style="font-size:28px">🔒</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:800;margin-bottom:4px">Pro: Automated Double Programming — the gold standard of pharma QC</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.8)">
+          Each of the 141 catalog entries has validated R code (tern + rtables).
+          Pro runs this code against <em>your</em> ADaM datasets, captures the output,
+          and compares cell-by-cell against your actual submitted TFLs —
+          catching arithmetic errors, wrong denominators, format mismatches,
+          and cross-table N inconsistencies <strong>before FDA sees them</strong>.
+        </div>
+      </div>
+      <div style="text-align:center;white-space:nowrap">
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-bottom:4px">currently manual QC costs</div>
+        <div style="font-size:22px;font-weight:800">$50–200/hr</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6)">per statistician</div>
+      </div>
     </div>
   </div>
 </div>
