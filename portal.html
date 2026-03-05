@@ -959,6 +959,9 @@ function renderAll() {
   document.getElementById('ft-free-rate').textContent = rateExact + '%';
 })();
 
+// Initialize dashboard with correct Free data on load
+if (typeof renderAll === 'function') renderAll();
+
 </script>
 <footer style="background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:16px;font-size:11px;margin-top:40px;">
   TFL Validator OSS — Built with ❤️ for the pharma stats community — 
