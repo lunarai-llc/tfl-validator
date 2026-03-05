@@ -816,7 +816,7 @@ document.getElementById('a-body').innerHTML=FREE_AUDIT.map(a=>`<tr><td style="fo
 (function(){ const ds=new Set(FREE_SPECS.map(s=>s.dataset)); const sel=document.getElementById('specsFilt'); ds.forEach(d=>{ const o=document.createElement('option'); o.value=d; o.textContent=d; sel.appendChild(o); }); })();
 function renderSpecs(){
   const f=document.getElementById('specsFilt').value;
-  const rows=f==='All'?SPECS:FREE_SPECS.filter(s=>s.dataset===f);
+  const rows=f==='All'?FREE_SPECS:FREE_SPECS.filter(s=>s.dataset===f);
   document.getElementById('s-body').innerHTML=rows.map(s=>{
     const coreStyle=s.core==='Req'?'font-weight:700;color:var(--navy)':'color:var(--dgrey)';
     const typeColor=s.type.toLowerCase().includes('num')?'color:var(--blue);font-weight:600':'color:var(--dgrey)';
